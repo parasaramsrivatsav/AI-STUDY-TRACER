@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chatbot-widget.css">
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+</div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">AI Features</div>
+        <a href="ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="profile.html" class="user-card active" style="background:rgba(99,130,255,0.15)">
+        <div class="user-avatar user-avatar-text">S</div>
+        <div class="user-info"><div class="user-name user-display-name">Student</div><div class="user-role">Active Learner</div></div>
+      </a>
+      <button onclick="logoutRoot()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>👤 My Profile</h1><div class="breadcrumb">Account & Statistics</div></div>
+    </div>
+    <div class="page-content">
+      <div style="max-width:640px;margin:0 auto">
+        <!-- Profile Card -->
+        <div class="card" style="margin-bottom:20px">
+          <div style="text-align:center;padding:20px 0">
+            <div id="bigAvatar" style="width:88px;height:88px;background:linear-gradient(135deg,#6382ff,#a855f7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;font-weight:800;margin:0 auto 16px;box-shadow:0 8px 24px rgba(99,130,255,0.35)">S</div>
+            <div id="profileName" style="font-size:22px;font-weight:800;margin-bottom:4px">Loading...</div>
+            <div id="profileEmail" style="font-size:13px;color:var(--text-muted);margin-bottom:8px">—</div>
+            <div id="profileJoined" style="font-size:12px;color:var(--text-muted)">Member since: —</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:20px" id="statsGrid">
+          <div class="metric-card blue" style="text-align:center">
+            <div class="metric-icon blue" style="margin:0 auto 10px">⏱️</div>
+            <div class="metric-value gradient-text" id="statHours">—</div>
+            <div class="metric-label">Total Hours</div>
+          </div>
+          <div class="metric-card purple" style="text-align:center">
+            <div class="metric-icon purple" style="margin:0 auto 10px">📝</div>
+            <div class="metric-value" style="background:linear-gradient(135deg,#a855f7,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent" id="statSessions">—</div>
+            <div class="metric-label">Sessions</div>
+          </div>
+          <div class="metric-card green" style="text-align:center">
+            <div class="metric-icon green" style="margin:0 auto 10px">📚</div>
+            <div class="metric-value" style="background:linear-gradient(135deg,#10b981,#22d3ee);-webkit-background-clip:text;-webkit-text-fill-color:transparent" id="statSubjects">—</div>
+            <div class="metric-label">Subjects</div>
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="card">
+          <div class="card-header"><div class="card-title">⚡ Quick Links</div></div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <a href="study/add_session.html" class="btn btn-primary">➕ Log New Study Session</a>
+            <a href="ai/productivity_analysis.html" class="btn btn-secondary">🤖 Run Productivity Analysis</a>
+            <a href="ai/placement_readiness.html" class="btn btn-secondary">💼 Predict Placement Readiness</a>
+            <a href="ai/ai_study_plan.html" class="btn btn-secondary">📅 Generate Study Plan</a>
+            <div class="divider"></div>
+            <button onclick="logoutRoot()" class="btn btn-danger">🚪 Logout</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="js/charts.js"></script>
+<script>
+requireAuthRoot().then(async u => {
+  if (!u) return;
+  setUserDisplay(u.username);
+  document.getElementById('bigAvatar').textContent = u.username[0].toUpperCase();
+
+  try {
+    const data = await api('/get_profile');
+    document.getElementById('profileName').textContent = data.user.username;
+    document.getElementById('profileEmail').textContent = data.user.email;
+    const joined = new Date(data.user.created_at).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+    document.getElementById('profileJoined').textContent = 'Member since: ' + joined;
+    document.getElementById('statHours').textContent = data.total_hours + 'h';
+    document.getElementById('statSessions').textContent = data.session_count;
+    document.getElementById('statSubjects').textContent = data.subjects_count;
+  } catch {}
+});
+</script>
+  <script src="js/chatbot-widget.js"></script>
+</body>
+</html>

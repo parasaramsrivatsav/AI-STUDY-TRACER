@@ -1,0 +1,52 @@
+{
+    "title": "Accessibility Tutorial",
+    "lessons": [
+        {
+            "id": "access_intro",
+            "title": "What is Accessibility?",
+            "content": "\n                    <h3>Web Accessibility Overview</h3>\n                    <p>Web accessibility (A11y) means that websites, tools, and technologies are designed and developed so that people with disabilities can use them.</p>\n                    <p>Accessibility is not just for people with permanent disabilities. It also benefits people with temporary or situational limitations.</p>\n                "
+        },
+        {
+            "id": "access_images",
+            "title": "Accessible Images",
+            "content": "\n                    <h3>The alt Attribute</h3>\n                    <p>The <code>alt</code> attribute provides a text alternative for an image if it cannot be displayed.</p>\n                    <p>Screen readers read the <code>alt</code> text to users who cannot see the image.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;img src=\"dog.jpg\" alt=\"A golden retriever puppy playing in the grass\"&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "access_semantic",
+            "title": "Semantic HTML",
+            "content": "\n                    <h3>Use Semantic Elements</h3>\n                    <p>Semantic elements (like <code>&lt;nav&gt;</code>, <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;footer&gt;</code>) help screen readers understand the structure and purpose of different parts of a web page.</p>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "access_q1",
+            "question": "What does 'A11y' stand for?",
+            "options": ["Accessibility", "Accountability", "Availability", "Adaptability"],
+            "answer": 0
+        },
+        {
+            "id": "access_q2",
+            "question": "Which HTML attribute provides alternative text for images?",
+            "options": ["title", "src", "alt", "longdesc"],
+            "answer": 2
+        },
+        {
+            "id": "access_q3",
+            "question": "What is the primary purpose of ARIA (Accessible Rich Internet Applications)?",
+            "options": ["To speed up page loading", "To provide more information to screen readers", "To add animations to the UI", "To create mobile-responsive layouts"],
+            "answer": 1
+        },
+        {
+            "id": "access_q4",
+            "question": "Which of the following is true regarding color contrast for accessibility?",
+            "options": ["Contrast doesn't matter for readability", "High contrast is essential for users with visual impairments", "Low contrast is better for night mode", "Color should be the only way to convey information"],
+            "answer": 1
+        },
+        {
+            "id": "access_q5",
+            "question": "Which HTML tag is most appropriate for a button that triggers an action?",
+            "options": ["&lt;div&gt;", "&lt;span&gt;", "&lt;a&gt;", "&lt;button&gt;"],
+            "answer": 3
+        }
+    ]
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Dashboard - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/collaborative.css">
+  <link rel="stylesheet" href="css/chatbot-widget.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><h2>AI Study Tracker</h2><span>Smart Learning</span></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="groups.html" class="nav-item active"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">AI Features</div>
+        <a href="ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text" id="sidebarAvatar">U</div>
+        <div class="user-info"><div class="user-name user-display-name">User</div><div class="user-role">Student</div></div>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1 id="groupName">Group Dashboard</h1>
+        <div class="breadcrumb">
+          Collaborative Study Mode • <span id="groupIdDisplay" style="color:var(--accent-blue);font-weight:700">ID: ...</span> 
+          <button onclick="copyGroupId()" class="btn btn-secondary btn-sm" style="padding:2px 8px;font-size:10px;margin-left:5px">📋 Copy ID</button>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <button onclick="shareGroup()" class="btn btn-primary btn-sm">📢 Share</button>
+        <button id="timerBtn" onclick="toggleTimer()" class="btn btn-secondary btn-sm">🚀 Start Timer</button>
+        <button onclick="window.location.href='leaderboard.html?id='+groupId" class="btn btn-secondary btn-sm">🏆 Leaderboard</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <!-- Live Status -->
+      <div class="card" style="margin-bottom:24px;border-left:4px solid var(--accent-green)">
+        <div class="card-header"><div class="card-title">🔥 Live Studying Members</div></div>
+        <div id="liveMembers" style="display:flex;flex-wrap:wrap;gap:12px">
+          <p class="empty-state">No one is studying right now. Be the first!</p>
+        </div>
+      </div>
+
+      <div class="charts-grid" style="margin-bottom:24px">
+        <div class="card">
+          <div class="card-header"><div class="card-title">📊 Group Performance</div></div>
+          <div style="height:250px"><canvas id="groupPerformanceChart"></canvas></div>
+        </div>
+        
+        <!-- Chat Area -->
+        <div class="card">
+          <div class="card-header"><div class="card-title">💬 Group Chat</div></div>
+          <div class="chat-window">
+            <div id="chatMessages" class="chat-messages"></div>
+            <form id="chatForm" class="chat-input-area">
+              <input type="text" id="chatInput" class="form-input" placeholder="Share a tip or ask a question..." autocomplete="off" style="flex:1">
+              <button type="submit" class="btn btn-primary btn-sm">Send</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      
+      <div class="card">
+        <div class="card-header"><div class="card-title">👥 Group Members</div></div>
+        <div id="membersList" style="display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:15px"></div>
+      </div>
+    </div>
+  </main>
+  </div>
+
+  <script src="js/charts.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupId = urlParams.get('id');
+    let isStudying = false;
+    let chatInterval;
+
+    async function init() {
+      if (!groupId) return window.location.href = 'groups.html';
+      const user = await requireAuthRoot();
+      if (!user) return;
+      setUserDisplay(user.username);
+      const avatar = document.getElementById('sidebarAvatar');
+      if (avatar) avatar.textContent = user.username[0].toUpperCase();
+      
+      await loadDashboard();
+      // Check if this specific user is studying
+      checkIsStudying();
+
+      // Polling for live status and stats
+      setInterval(loadDashboard, 5000); 
+      
+      chatInterval = setInterval(loadChat, 3000);
+      loadChat();
+    }
+
+    let performanceChart; 
+    async function loadDashboard() {
+      try {
+        const data = await api(`/get_group_details/${groupId}`);
+        document.getElementById('groupName').textContent = '👥 ' + data.group.name;
+        document.getElementById('groupIdDisplay').textContent = `ID: ${groupId}`;
+
+        // Members & Live Status
+        const liveArea = document.getElementById('liveMembers');
+        const listArea = document.getElementById('membersList');
+        const liveOnes = data.members.filter(m => m.active_subject);
+        
+        if (liveOnes.length > 0) {
+          liveArea.innerHTML = liveOnes.map(m => `
+            <div class="badge badge-success" style="padding:10px 15px;display:flex;align-items:center;gap:8px">
+              <span class="pulse-icon"></span> 
+              <strong>${m.username}</strong> is studying <em>${m.active_subject}</em>
+            </div>
+          `).join('');
+        } else {
+          liveArea.innerHTML = '<p class="empty-state">No one is studying right now. Be the first!</p>';
+        }
+
+        listArea.innerHTML = data.members.map(m => `
+          <div class="card" style="padding:15px;text-align:center;position:relative">
+            ${m.active_subject ? '<span class="badge badge-success" style="position:absolute;top:5px;right:5px;font-size:8px">🔥 LIVE</span>' : ''}
+            <div class="user-avatar user-avatar-text" style="margin:0 auto 10px">${m.username[0].toUpperCase()}</div>
+            <div style="font-weight:700">${m.username}</div>
+            <div style="font-size:12px;color:var(--text-muted)">${m.role}</div>
+          </div>
+        `).join('');
+
+        // Chart - Update if exists, else create
+        const chartData = [data.stats.total_hours || 0, data.stats.avg_focus || 0];
+        if (performanceChart) performanceChart.destroy();
+        const canvas = document.getElementById('groupPerformanceChart');
+        if (canvas) {
+            performanceChart = createDoughnutChart('groupPerformanceChart', ['Total Hours', 'Avg Focus'], chartData, ['#3b82f6', '#10b981']);
+        }
+      } catch (err) { 
+          console.error('Dashboard Load Error:', err); 
+          document.getElementById('liveMembers').innerHTML = `<p class="empty-state" style="color:var(--accent-red)">⚠️ Error loading group data. Please try refreshing.</p>`;
+      }
+    }
+
+    async function checkIsStudying() {
+        try {
+            const data = await api('/get_my_groups'); // We use this to get current user info and members
+            const groupData = await api(`/get_group_details/${groupId}`);
+            const currentUserName = document.querySelector('.user-display-name').textContent;
+            const me = groupData.members.find(m => m.username === currentUserName);
+            
+            if (me && me.active_subject) {
+                isStudying = true;
+                const btn = document.getElementById('timerBtn');
+                btn.textContent = '⏹️ Stop Timer';
+                btn.className = 'btn btn-danger btn-sm';
+            }
+        } catch (err) { console.error(err); }
+    }
+
+    async function loadChat() {
+      try {
+        const msgs = await api(`/group_chat/${groupId}`);
+        const chatArea = document.getElementById('chatMessages');
+        const currentUser = document.querySelector('.user-display-name').textContent;
+        
+        chatArea.innerHTML = msgs.map(m => `
+          <div class="chat-bubble ${m.username === currentUser ? 'bubble-sent' : 'bubble-received'}">
+            <div class="msg-sender">${m.username}</div>
+            <div class="msg-text">${m.message}</div>
+          </div>
+        `).join('');
+        chatArea.scrollTop = chatArea.scrollHeight;
+      } catch (err) { console.error(err); }
+    }
+
+    document.getElementById('chatForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const msg = input.value.trim();
+      if (!msg) return;
+      try {
+        await api('/send_group_message', 'POST', { group_id: groupId, message: msg });
+        input.value = '';
+        loadChat();
+      } catch (err) { console.error(err); }
+    });
+
+    async function toggleTimer() {
+        const btn = document.getElementById('timerBtn');
+        if (!isStudying) {
+            const subject = prompt("What subject are you studying?", "General");
+            if (!subject) return;
+            await api('/start_timer', 'POST', { subject });
+            btn.textContent = '⏹️ Stop Timer';
+            btn.className = 'btn btn-danger btn-sm';
+            isStudying = true;
+            showToast('Timer started! Your group can now see your status.');
+        } else {
+            await api('/stop_timer', 'POST');
+            btn.textContent = '🚀 Start Timer';
+            btn.className = 'btn btn-primary btn-sm';
+            isStudying = false;
+            showToast('Timer stopped.');
+        }
+        loadDashboard();
+    }
+
+    function copyGroupId() {
+        navigator.clipboard.writeText(groupId).then(() => {
+            showToast('Group ID copied to clipboard!');
+        });
+    }
+
+    async function shareGroup() {
+        let baseUrl = window.location.origin;
+        if (baseUrl.includes('localhost') || baseUrl.includes('127.0.0.1')) {
+            baseUrl = 'http://10.10.243.103:5000';
+        }
+
+        const groupName = document.getElementById('groupName').textContent.replace('👥 ', '');
+        const shareData = {
+            title: 'Join my Study Group!',
+            text: `Hey! Join my study group "${groupName}" on AI Study Tracker. Group ID: ${groupId}`,
+            url: baseUrl + '/groups.html'
+        };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log('Share failed:', err);
+            }
+        } else {
+            const fullText = `${shareData.text}\nJoin here: ${shareData.url}`;
+            navigator.clipboard.writeText(fullText).then(() => {
+                showToast('Invite message copied to clipboard!');
+            });
+        }
+    }
+
+    init();
+    window.onbeforeunload = () => clearInterval(chatInterval);
+  </script>
+  <style>
+    .pulse-icon {
+      width: 10px; height: 10px; background: #10b981; border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+  </style>
+  <script src="js/chatbot-widget.js"></script>
+</body>
+</html>

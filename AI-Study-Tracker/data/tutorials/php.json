@@ -1,0 +1,57 @@
+{
+    "title": "PHP Tutorial",
+    "lessons": [
+        {
+            "id": "php_intro",
+            "title": "PHP Introduction",
+            "content": "\n                    <h3>What is PHP?</h3>\n                    <ul>\n                        <li>PHP is an acronym for \"PHP: Hypertext Preprocessor\".</li>\n                        <li>PHP is a widely-used, open source scripting language.</li>\n                        <li>PHP scripts are executed on the server.</li>\n                        <li>PHP is free to download and use.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "php_getstarted",
+            "title": "PHP Get Started",
+            "content": "\n                    <h3>PHP Setup</h3>\n                    <p>To start using PHP, you can find a web host with PHP and MySQL support, or install a web server (like Apache) on your own PC, and then install PHP and MySQL.</p>\n                    <h3>PHP Quickstart</h3>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;?php\necho \"Hello World!\";\n?&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "php_syntax",
+            "title": "PHP Syntax",
+            "content": "\n                    <h3>Basic PHP Syntax</h3>\n                    <p>A PHP script can be placed anywhere in the document.</p>\n                    <p>A PHP script starts with <code>&lt;?php</code> and ends with <code>?&gt;</code>.</p>\n                    <p>The default file extension for PHP files is \".php\".</p>\n                "
+        },
+        {
+            "id": "php_variables",
+            "title": "PHP Variables",
+            "content": "\n                    <h3>Creating (Declaring) PHP Variables</h3>\n                    <p>In PHP, a variable starts with the <code>$</code> sign, followed by the name of the variable:</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n$txt = \"Hello world!\";\n$x = 5;\n$y = 10.5;\n                        </div>\n                    </div>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "php_q1",
+            "question": "What does PHP stand for?",
+            "options": ["Private Home Page", "PHP: Hypertext Preprocessor", "Personal Hypertext Processor", "Public Hyperlink Processor"],
+            "answer": 1
+        },
+        {
+            "id": "php_q2",
+            "question": "PHP server scripts are surrounded by which delimiters?",
+            "options": ["&lt;script&gt;...&lt;/script&gt;", "&lt;&amp;&gt;...&lt;/&amp;&gt;", "&lt;?php...?&gt;", "&lt;?php&gt;...&lt;/?&gt;"],
+            "answer": 2
+        },
+        {
+            "id": "php_q3",
+            "question": "How do you write \"Hello World\" in PHP?",
+            "options": ["\"Hello World\";", "echo \"Hello World\";", "Document.Write(\"Hello World\");", "printf(\"Hello World\");"],
+            "answer": 1
+        },
+        {
+            "id": "php_q4",
+            "question": "All variables in PHP start with which symbol?",
+            "options": ["&amp;", "!", "$", "#"],
+            "answer": 2
+        },
+        {
+            "id": "php_q5",
+            "question": "What is the correct way to end a PHP statement?",
+            "options": [".", "New line", ";", "&lt;/php&gt;"],
+            "answer": 2
+        }
+    ]
+}

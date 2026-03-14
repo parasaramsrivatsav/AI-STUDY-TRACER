@@ -1,0 +1,47 @@
+{
+    "title": "Bootstrap Tutorial",
+    "lessons": [
+        {
+            "id": "bs_intro",
+            "title": "Bootstrap Introduction",
+            "content": "\n                    <h3>What is Bootstrap?</h3>\n                    <ul>\n                        <li>Bootstrap is a free front-end framework for faster and easier web development.</li>\n                        <li>Bootstrap includes HTML and CSS based design templates for typography, forms, buttons, tables, navigation, modals, image carousels and many other, as well as optional JavaScript plugins.</li>\n                        <li>Bootstrap also gives you the ability to easily create responsive designs.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "bs_getstarted",
+            "title": "Bootstrap Get Started",
+            "content": "\n                    <h3>Bootstrap CDN</h3>\n                    <p>If you don't want to download and host Bootstrap yourself, you can include it from a CDN (Content Delivery Network).</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;!-- Latest compiled and minified CSS --&gt;<br>\n&lt;link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css\"&gt;\n                        </div>\n                    </div>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "bs_q1",
+            "question": "What is Bootstrap?",
+            "options": ["A database management system", "A backend framework", "A CSS framework for developing responsive websites", "A JavaScript library for state management"],
+            "answer": 2
+        },
+        {
+            "id": "bs_q2",
+            "question": "Which class is used to create a responsive, fixed-width container in Bootstrap?",
+            "options": [".container-fluid", ".container", ".row", ".column"],
+            "answer": 1
+        },
+        {
+            "id": "bs_q3",
+            "question": "Bootstrap's grid system is based on how many columns?",
+            "options": ["10", "12", "16", "24"],
+            "answer": 1
+        },
+        {
+            "id": "bs_q4",
+            "question": "Which class is used to create a button with a primary action style?",
+            "options": [".btn-action", ".btn-main", ".btn-primary", ".btn-highlight"],
+            "answer": 2
+        },
+        {
+            "id": "bs_q5",
+            "question": "How do you make an image responsive in Bootstrap 5?",
+            "options": [".img-responsive", ".img-fluid", ".img-scale", ".img-auto"],
+            "answer": 1
+        }
+    ]
+}

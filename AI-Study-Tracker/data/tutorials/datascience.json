@@ -1,0 +1,47 @@
+{
+    "title": "Data Science Tutorial",
+    "lessons": [
+        {
+            "id": "ds_intro",
+            "title": "What is Data Science?",
+            "content": "\n                    <h3>Data Science Overview</h3>\n                    <p>Data science is the study of data. It involves developing methods of recording, storing, and analyzing data to effectively extract useful information.</p>\n                    <p>The goal of data science is to gain insights and knowledge from any type of data — both structured and unstructured.</p>\n                "
+        },
+        {
+            "id": "ds_python",
+            "title": "Data Science with Python",
+            "content": "\n                    <h3>Why Python for Data Science?</h3>\n                    <p>Python is the most popular programming language for Data Science. It has many libraries that are great for data analysis, like NumPy, Pandas, and Matplotlib.</p>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "ds_q1",
+            "question": "What is the first step in a typical Data Science project?",
+            "options": ["Building a model", "Data Cleaning", "Problem Definition", "Data Visualization"],
+            "answer": 2
+        },
+        {
+            "id": "ds_q2",
+            "question": "Which library is most commonly used for data manipulation in Python?",
+            "options": ["Matplotlib", "Pandas", "Scikit-Learn", "Seaborn"],
+            "answer": 1
+        },
+        {
+            "id": "ds_q3",
+            "question": "What does 'Exploratory Data Analysis' (EDA) primarily involve?",
+            "options": ["Writing production code", "Summarizing the main characteristics of a dataset through visualization", "Deploying models to the cloud", "Designing database schemas"],
+            "answer": 1
+        },
+        {
+            "id": "ds_q4",
+            "question": "Which of the following is a type of Unsupervised Learning?",
+            "options": ["Linear Regression", "Decision Trees", "K-Means Clustering", "Support Vector Machines"],
+            "answer": 2
+        },
+        {
+            "id": "ds_q5",
+            "question": "What is a 'p-value' used for in statistics?",
+            "options": ["To measure model accuracy", "To determine the probability of results occurring by chance", "To scale features", "To visualize data distribution"],
+            "answer": 1
+        }
+    ]
+}

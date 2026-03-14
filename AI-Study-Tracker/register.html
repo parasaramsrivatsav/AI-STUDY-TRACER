@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="auth-bg">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">🎓</div>
+        <h1>AI Study Tracker</h1>
+        <p>Intelligent Learning Platform</p>
+      </div>
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-subtitle">Start tracking your study journey today</p>
+      <div id="alert-area"></div>
+      <form id="registerForm" autocomplete="on">
+        <div class="form-group">
+          <label class="form-label">Username</label>
+          <input type="text" id="username" class="form-input" placeholder="Choose a username" required minlength="3" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="Enter your email" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Create a password (min 6 chars)" required minlength="6" autocomplete="new-password">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Confirm Password</label>
+          <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your password" required autocomplete="new-password">
+        </div>
+        <button type="submit" id="registerBtn" class="btn btn-primary btn-full">
+          🚀 Create Account
+        </button>
+      </form>
+      <div class="auth-link">
+        Already have an account? <a href="login.html">Sign in here</a>
+      </div>
+    </div>
+  </div>
+  <script src="js/charts.js"></script>
+  <script>
+    if (localStorage.getItem('user_id')) window.location.href = 'dashboard.html';
+    api('/check_auth').then(d => { if (d.logged_in) window.location.href = 'dashboard.html'; }).catch(() => {});
+
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const confirm = document.getElementById('confirmPassword').value;
+
+      if (password !== confirm) {
+        showAlert('alert-area', 'Passwords do not match!', 'error');
+        return;
+      }
+      setLoading('registerBtn', true, 'Creating account...');
+      try {
+        const res = await api('/register', 'POST', { username, email, password });
+        localStorage.setItem('user_id', res.user_id);
+        localStorage.setItem('username', res.username);
+        showToast('Account created! Welcome aboard! 🎉', 'success');
+        setTimeout(() => window.location.href = 'dashboard.html', 900);
+      } catch (err) {
+        showAlert('alert-area', err.error || 'Registration failed. Please try again.', 'error');
+        setLoading('registerBtn', false);
+      }
+    });
+  </script>
+</body>
+</html>

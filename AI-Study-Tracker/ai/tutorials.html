@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorials - AI Study Tracker</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/chatbot-widget.css">
+    <link rel="stylesheet" href="../css/tutorials.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-wrap">
+                    <div class="logo-icon">🎓</div>
+                    <div class="logo-text">
+                        <h2>AI Study Tracker</h2><span>Smart Learning</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <div class="nav-section-title">Main</div>
+                    <a href="../dashboard.html" class="nav-item"><span
+                            class="nav-icon">📊</span><span>Dashboard</span></a>
+                    <a href="../notifications.html" class="nav-item"><span
+                            class="nav-icon">🔔</span><span>Notifications</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Study</div>
+                    <a href="placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+                    <a href="study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+                    <a href="../ai/tutorials.html" class="nav-item active"><span
+                            class="nav-icon">📖</span><span>Tutorials</span></a>
+                </div>
+                <div class="nav-section">
+                    <div class="nav-section-title">Collaborative</div>
+                    <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+                </div>
+                <!-- ... other sections ... -->
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="top-bar">
+                <div class="top-bar-left">
+                    <h1>📖 Tutorials</h1>
+                    <div class="breadcrumb">Learn new skills step-by-step</div>
+                </div>
+                <div class="top-bar-right">
+                    <div class="search-wrap">
+                        <input type="text" placeholder="Search tutorials..." class="form-input search-input">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Horizontal Subject Nav -->
+            <nav class="subject-bar">
+                <!-- Dynamically populated by tutorials.js -->
+            </nav>
+
+            <div class="tutorial-container">
+                <!-- Topics Sidebar -->
+                <aside class="topics-sidebar">
+                    <div class="sidebar-title" id="subjectHeader">HTML Tutorial</div>
+                    <div class="topics-list" id="topicsList">
+                        <!-- Populated by JS -->
+                    </div>
+                </aside>
+
+                <!-- Content Area -->
+                <section class="content-area">
+                    <div class="content-card">
+                        <div class="content-header">
+                            <h2 id="topicTitle">HTML Tutorial</h2>
+                            <div class="content-nav">
+                                <button class="btn btn-secondary btn-sm" id="prevBtn">❮ Home</button>
+                                <button class="btn btn-primary btn-sm" id="nextBtn">Next ❯</button>
+                            </div>
+                        </div>
+                        <div class="content-body" id="topicContent">
+                            <!-- Populated by JS -->
+                            <p>Select a topic from the sidebar to start learning.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/tutorials.js"></script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+
+</html>

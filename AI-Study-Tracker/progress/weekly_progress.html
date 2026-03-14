@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Progress - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+<div class="nav-section-title">AI Features</div>
+        <a href="../ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="../ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="../ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span> Strategic Roadmap</a>
+        <a href="../ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="weekly_progress.html" class="nav-item active"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card"><div class="user-avatar user-avatar-text">S</div><div class="user-info"><div class="user-name user-display-name">Student</div></div></a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>📈 Weekly Progress</h1><div class="breadcrumb">Analytics → 4-Week Trend</div></div>
+    </div>
+    <div class="page-content">
+      <div class="charts-grid" style="margin-bottom:20px">
+        <div class="chart-card">
+          <div class="card-header"><div class="card-title">📊 Study Hours by Week</div></div>
+          <div class="chart-wrapper"><canvas id="weeklyHoursChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="card-header"><div class="card-title">🎯 Avg Focus by Week</div></div>
+          <div class="chart-wrapper"><canvas id="weeklyFocusChart"></canvas></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">📚 This Week's Subjects</div></div>
+        <div id="weekSubjects" class="loading-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/charts.js"></script>
+<script>
+requireAuth().then(u => { if (u) { setUserDisplay(u.username); loadProgress(); }});
+
+async function loadProgress() {
+  try {
+    const data = await api('/weekly_progress');
+    const labels = data.weeks.map(w => w.week);
+    const hoursData = data.weeks.map(w => w.hours);
+    const focusData = data.weeks.map(w => w.avg_focus);
+
+    createBarChart('weeklyHoursChart', labels, [{
+      label: 'Study Hours',
+      data: hoursData,
+      backgroundColor: ['rgba(99,130,255,0.5)','rgba(99,130,255,0.6)','rgba(99,130,255,0.7)','rgba(99,130,255,0.9)'],
+      borderColor: '#6382ff', borderWidth: 2, borderRadius: 8
+    }]);
+
+    createLineChart('weeklyFocusChart', labels, [{
+      label: 'Avg Focus Level',
+      data: focusData,
+      borderColor: '#a855f7',
+      backgroundColor: 'rgba(168,85,247,0.12)',
+      fill: true, tension: 0.4, pointBackgroundColor: '#a855f7', pointRadius: 6
+    }]);
+
+    const subEl = document.getElementById('weekSubjects');
+    if (data.subjects_this_week.length === 0) {
+      subEl.innerHTML = '<p style="color:var(--text-muted);padding:16px">No sessions this week yet. <a href="../study/add_session.html" style="color:var(--accent-blue)">Add one →</a></p>';
+    } else {
+      subEl.innerHTML = '<div class="table-wrapper"><table class="data-table"><thead><tr><th>Subject</th><th>Hours</th><th>Avg Focus</th><th>Status</th></tr></thead><tbody>' +
+        data.subjects_this_week.map(s => {
+          const status = s.avg_focus >= 7 ? 'success' : s.avg_focus >= 5 ? 'info' : 'warning';
+          const txt = s.avg_focus >= 7 ? 'Strong' : s.avg_focus >= 5 ? 'Average' : 'Weak';
+          return `<tr>
+            <td><span class="subject-badge">📖 ${s.subject}</span></td>
+            <td><strong style="color:var(--accent-blue)">${s.hours}h</strong></td>
+            <td>
+              <div class="focus-bar">
+                <div class="focus-bar-track"><div class="focus-bar-fill" style="width:${s.avg_focus*10}%"></div></div>
+                <span style="font-size:12px;font-weight:700">${s.avg_focus}</span>
+              </div>
+            </td>
+            <td><span class="badge badge-${status}">${txt}</span></td>
+          </tr>`;
+        }).join('') + '</tbody></table></div>';
+    }
+  } catch (err) {
+    console.error(err);
+  }
+}
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

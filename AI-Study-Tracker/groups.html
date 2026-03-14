@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Groups - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/collaborative.css">
+  <link rel="stylesheet" href="css/chatbot-widget.css">
+</head>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><h2>AI Study Tracker</h2><span>Smart Learning</span></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Study</div>
+        <a href="study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="groups.html" class="nav-item active"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">AI Features</div>
+        <a href="ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text" id="sidebarAvatar">U</div>
+        <div class="user-info"><div class="user-name user-display-name">User</div><div class="user-role">Student</div></div>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1>👥 Study Groups</h1>
+        <div class="breadcrumb">Collaborative → Groups</div>
+      </div>
+      <div class="top-bar-right">
+        <button onclick="openCreateModal()" class="btn btn-primary btn-sm">➕ Create Group</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-header"><div class="card-title">🔗 Join a Group</div></div>
+        <div style="display:flex;gap:12px">
+          <input type="number" id="joinGroupId" class="form-input" placeholder="Enter Group ID..." style="max-width:200px">
+          <button onclick="joinGroup()" class="btn btn-secondary">Join Now</button>
+        </div>
+      </div>
+
+      <h3 style="margin-bottom:16px">Your Groups</h3>
+      <div id="groupsList" class="groups-grid">
+        <!-- Groups will appear here -->
+        <div class="loading-state">Loading groups...</div>
+      </div>
+    </div>
+  </main>
+  </div>
+
+  <!-- Create Group Modal -->
+  <div id="createModal" class="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;backdrop-filter:blur(5px);align-items:center;justify-content:center">
+    <div class="card" style="max-width:500px;width:90%">
+      <div class="card-header"><h3>Create New Study Group</h3></div>
+      <div style="padding:20px">
+        <div class="form-group">
+          <label class="form-label">Group Name</label>
+          <input type="text" id="newName" class="form-input" placeholder="e.g., Exam Prep 2024">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Description</label>
+          <textarea id="newDesc" class="form-input" rows="3" placeholder="What is this group about?"></textarea>
+        </div>
+        <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:20px">
+          <button onclick="closeModal()" class="btn btn-secondary">Cancel</button>
+          <button onclick="createGroup()" class="btn btn-primary">Create Group</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/charts.js"></script>
+  <script>
+    async function init() {
+      const user = await requireAuthRoot();
+      if (!user) return;
+      setUserDisplay(user.username);
+      document.getElementById('sidebarAvatar').textContent = user.username[0].toUpperCase();
+      loadGroups();
+    }
+
+    async function loadGroups() {
+      try {
+        const groups = await api('/get_my_groups');
+        const list = document.getElementById('groupsList');
+        if (groups.length === 0) {
+          list.innerHTML = '<div class="empty-state">You haven\'t joined any groups yet. Create one to get started!</div>';
+          return;
+        }
+        list.innerHTML = groups.map(g => `
+          <div class="group-card" onclick="window.location.href='group_dashboard.html?id=${g.id}'">
+            <div class="group-name">👥 ${g.name}</div>
+            <div class="group-desc">${g.description || 'No description provided.'}</div>
+            <div class="group-meta">
+              <span>👤 ${g.member_count} Members</span>
+              <div style="display:flex;align-items:center;gap:5px">
+                <span class="badge badge-info" style="font-size:10px">ID: ${g.id}</span>
+                <button onclick="event.stopPropagation(); shareGroup(${g.id}, '${g.name}')" class="btn btn-primary btn-sm" style="padding:2px 8px;font-size:10px">📢 Share</button>
+                <button onclick="event.stopPropagation(); copyId(${g.id})" class="btn btn-secondary btn-sm" style="padding:2px 5px;font-size:9px" title="Copy ID">📋</button>
+              </div>
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    function openCreateModal() { document.getElementById('createModal').style.display = 'flex'; }
+    function closeModal() { document.getElementById('createModal').style.display = 'none'; }
+
+    function copyId(id) {
+        navigator.clipboard.writeText(id).then(() => {
+            showToast('Group ID ' + id + ' copied to clipboard!');
+        });
+    }
+
+    async function shareGroup(id, name) {
+        let baseUrl = window.location.origin;
+        if (baseUrl.includes('localhost') || baseUrl.includes('127.0.0.1')) {
+            // Suggest using the network IP if known or just warn
+            baseUrl = 'http://10.10.243.103:5000'; // Using the identified local IP
+        }
+        
+        const shareData = {
+            title: 'Join my Study Group!',
+            text: `Hey! Join my study group "${name}" on AI Study Tracker. Group ID: ${id}`,
+            url: baseUrl + '/groups.html'
+        };
+
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                console.log('Share failed:', err);
+            }
+        } else {
+            const fullText = `${shareData.text}\nJoin here: ${shareData.url}`;
+            navigator.clipboard.writeText(fullText).then(() => {
+                showToast('Invite message copied to clipboard!');
+            });
+        }
+    }
+
+    async function createGroup() {
+      const name = document.getElementById('newName').value;
+      const description = document.getElementById('newDesc').value;
+      if (!name) return alert('Name is required');
+      try {
+        await api('/create_group', 'POST', { name, description });
+        closeModal();
+        loadGroups();
+        showToast('Group created successfully!');
+      } catch (err) { alert(err.error || 'Failed to create group'); }
+    }
+
+    async function joinGroup() {
+      const group_id = document.getElementById('joinGroupId').value;
+      if (!group_id) return;
+      try {
+        await api('/join_group', 'POST', { group_id: parseInt(group_id) });
+        document.getElementById('joinGroupId').value = '';
+        loadGroups();
+        showToast('Joined group!');
+      } catch (err) { alert(err.error || 'Failed to join group'); }
+    }
+
+    init();
+  </script>
+  <script src="js/chatbot-widget.js"></script>
+</body>
+</html>

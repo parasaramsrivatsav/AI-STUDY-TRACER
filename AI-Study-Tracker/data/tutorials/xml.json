@@ -1,0 +1,42 @@
+{
+    "title": "XML Tutorial",
+    "lessons": [
+        {
+            "id": "xml_intro",
+            "title": "XML Introduction",
+            "content": "\n                    <h3>What is XML?</h3>\n                    <ul>\n                        <li>XML stands for eXtensible Markup Language.</li>\n                        <li>XML is a markup language much like HTML.</li>\n                        <li>XML was designed to store and transport data.</li>\n                        <li>XML was designed to be self-descriptive.</li>\n                        <li>XML is a W3C Recommendation.</li>\n                    </ul>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "xml_q1",
+            "question": "What does XML stand for?",
+            "options": ["eXtensible Markup Language", "eXtra Modern Link", "eXample Markup Language", "eXtendable Multiple Language"],
+            "answer": 0
+        },
+        {
+            "id": "xml_q2",
+            "question": "Which of the following is true about XML tags?",
+            "options": ["XML tags are case-insensitive", "XML tags are case-sensitive", "XML tags are predefined", "XML tags must be in uppercase"],
+            "answer": 1
+        },
+        {
+            "id": "xml_q3",
+            "question": "What is the purpose of a DTD in XML?",
+            "options": ["To style the XML document", "To define the structure of an XML document", "To compress the XML file", "To encrypt the XML data"],
+            "answer": 1
+        },
+        {
+            "id": "xml_q4",
+            "question": "Is XML a substitute for HTML?",
+            "options": ["Yes", "No", "Only for mobile devices", "Only for older browsers"],
+            "answer": 1
+        },
+        {
+            "id": "xml_q5",
+            "question": "Which character is used to close a tag in XML?",
+            "options": ["\\", "/", "^", "*"],
+            "answer": 1
+        }
+    ]
+}

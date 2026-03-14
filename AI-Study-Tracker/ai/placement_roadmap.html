@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Career Roadmap - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+<div class="nav-section-title">AI Features</div>
+        <a href="productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+          <a href="placement_roadmap.html" class="nav-item active"><span class="nav-icon">🚀</span> Strategic Roadmap</a>
+          <a href="ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+</div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card"><div class="user-avatar user-avatar-text">S</div><div class="user-info"><div class="user-name user-display-name">Student</div></div></a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>🚀 Career Placement Roadmap</h1><div class="breadcrumb">AI → Strategic Career Planning</div></div>
+    </div>
+    <div class="page-content">
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Choose Your Path</div>
+            <div class="card-subtitle">Select a role to generate a personalized preparation roadmap</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:15px;align-items:center">
+          <select id="roleSelect" class="form-input" style="max-width:300px">
+            <optgroup label="Technical Roles">
+              <option value="Software Engineer">Software Engineer</option>
+              <option value="Software Developer">Software Developer</option>
+              <option value="Frontend Developer">Frontend Developer</option>
+              <option value="Backend Developer">Backend Developer</option>
+              <option value="Full Stack Developer">Full Stack Developer</option>
+              <option value="Web Developer">Web Developer</option>
+              <option value="Mobile App Developer">Mobile App Developer</option>
+              <option value="Game Developer">Game Developer</option>
+              <option value="Data Scientist">Data Scientist</option>
+              <option value="Data Analyst">Data Analyst</option>
+              <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+              <option value="AI Engineer">AI Engineer</option>
+              <option value="Deep Learning Engineer">Deep Learning Engineer</option>
+              <option value="Data Engineer">Data Engineer</option>
+              <option value="Database Administrator (DBA)">Database Administrator (DBA)</option>
+              <option value="Database Developer">Database Developer</option>
+              <option value="Cloud Engineer">Cloud Engineer</option>
+              <option value="DevOps Engineer">DevOps Engineer</option>
+              <option value="Site Reliability Engineer (SRE)">Site Reliability Engineer (SRE)</option>
+              <option value="System Administrator">System Administrator</option>
+              <option value="Network Engineer">Network Engineer</option>
+              <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+              <option value="Security Engineer">Security Engineer</option>
+              <option value="Ethical Hacker">Ethical Hacker</option>
+              <option value="Penetration Tester">Penetration Tester</option>
+              <option value="Information Security Analyst">Information Security Analyst</option>
+              <option value="QA Engineer">QA Engineer</option>
+              <option value="Automation Test Engineer">Automation Test Engineer</option>
+              <option value="Manual Tester">Manual Tester</option>
+              <option value="Performance Tester">Performance Tester</option>
+              <option value="Embedded Systems Engineer">Embedded Systems Engineer</option>
+              <option value="IoT Engineer">IoT Engineer</option>
+              <option value="Blockchain Developer">Blockchain Developer</option>
+              <option value="AR/VR Developer">AR/VR Developer</option>
+              <option value="Solutions Architect">Solutions Architect</option>
+            </optgroup>
+            <optgroup label="Non-Technical Roles">
+              <option value="Project Manager">Project Manager</option>
+              <option value="Program Manager">Program Manager</option>
+              <option value="Product Manager">Product Manager</option>
+              <option value="Business Analyst">Business Analyst</option>
+              <option value="Operations Manager">Operations Manager</option>
+              <option value="IT Consultant">IT Consultant</option>
+              <option value="Technical Support Engineer">Technical Support Engineer</option>
+              <option value="Customer Success Manager">Customer Success Manager</option>
+              <option value="Pre-Sales Engineer">Pre-Sales Engineer</option>
+              <option value="Solutions Consultant">Solutions Consultant</option>
+              <option value="Digital Marketing Specialist">Digital Marketing Specialist</option>
+              <option value="SEO Specialist">SEO Specialist</option>
+              <option value="Product Marketing Manager">Product Marketing Manager</option>
+              <option value="Sales Executive (IT Products)">Sales Executive (IT Products)</option>
+              <option value="HR Manager">HR Manager</option>
+              <option value="Technical Recruiter">Technical Recruiter</option>
+              <option value="Training Manager">Training Manager</option>
+              <option value="Technical Writer">Technical Writer</option>
+              <option value="Content Writer">Content Writer</option>
+              <option value="UI Designer">UI Designer</option>
+              <option value="UX Designer">UX Designer</option>
+              <option value="Product Designer">Product Designer</option>
+              <option value="Graphic Designer">Graphic Designer</option>
+              <option value="Product Owner">Product Owner</option>
+              <option value="Technology Consultant">Technology Consultant</option>
+              <option value="Data Product Manager">Data Product Manager</option>
+            </optgroup>
+          </select>
+          <button onclick="generateRoadmap()" id="genBtn" class="btn btn-primary">Generate Strategy</button>
+        </div>
+      </div>
+
+      <div id="roadmapResult" style="display:none">
+        <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:20px">
+          <div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">🗺️ Step-by-Step Roadmap</div></div>
+              <div id="roadmapSteps" class="roadmap-steps" style="display:flex;flex-direction:column;gap:15px">
+                <!-- Steps appear here -->
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:20px">
+            <div class="card">
+              <div class="card-header"><div class="card-title">📚 Reference Books</div></div>
+              <div id="bookList" style="display:flex;flex-direction:column;gap:10px">
+                <!-- Books -->
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">🎥 YouTube Playlists</div></div>
+              <div id="playlistList" style="display:flex;flex-direction:column;gap:10px">
+                <!-- Playlists -->
+              </div>
+            </div>
+            <div class="card">
+              <div class="card-header"><div class="card-title">💡 Preparation Tips</div></div>
+              <div id="tipList" style="font-size:14px;color:var(--text-secondary);line-height:1.6">
+                <!-- Tips -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="emptyState" class="empty-state" style="padding:100px 0">
+        <div class="empty-icon">🚀</div>
+        <h3>Ready to start your journey?</h3>
+        <p>Select a career role above to view your preparation roadmap and resources.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../js/charts.js"></script>
+<script>
+requireAuth().then(u => { if (u) setUserDisplay(u.username); });
+
+async function generateRoadmap() {
+  const role = document.getElementById('roleSelect').value;
+  setLoading('genBtn', true, 'Generating...');
+  
+  try {
+    const data = await api('/placement_roadmap', 'POST', { role });
+    
+    document.getElementById('emptyState').style.display = 'none';
+    document.getElementById('roadmapResult').style.display = 'block';
+    
+    // Steps
+    const stepsArea = document.getElementById('roadmapSteps');
+    stepsArea.innerHTML = data.roadmap.map((s, idx) => `
+      <div style="display:flex;gap:15px">
+        <div style="flex-shrink:0;width:32px;height:32px;border-radius:50%;background:var(--accent-blue);color:white;display:flex;align-items:center;justify-content:center;font-weight:bold">${idx+1}</div>
+        <div>
+          <div style="font-weight:600;margin-bottom:4px">${s.step} <span class="badge ${s.priority === 'High' ? 'badge-danger' : 'badge-info'}" style="margin-left:8px;font-size:10px">${s.priority} Priority</span></div>
+          <div style="font-size:13px;color:var(--text-muted)">${s.desc}</div>
+        </div>
+      </div>
+    `).join('');
+    
+    // Books
+    const bookArea = document.getElementById('bookList');
+    bookArea.innerHTML = data.books.map(b => `
+      <div style="padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;border-left:3px solid var(--accent-purple)">
+        <div style="font-size:14px;font-weight:600">${b.title}</div>
+        <div style="font-size:12px;color:var(--text-muted)">By ${b.author}</div>
+      </div>
+    `).join('');
+    
+    // Playlists
+    const playArea = document.getElementById('playlistList');
+    playArea.innerHTML = data.playlists.map(p => `
+      <a href="${p.link}" target="_blank" style="padding:10px;background:rgba(239,68,68,0.05);border-radius:8px;display:flex;justify-content:space-between;align-items:center;text-decoration:none;transition:0.2s" onmouseover="this.style.background='rgba(239,68,68,0.1)'" onmouseout="this.style.background='rgba(239,68,68,0.05)'">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--text-main)">${p.name}</div>
+          <div style="font-size:11px;color:#ef4444">Watch on YouTube →</div>
+        </div>
+        <div style="font-size:20px">📺</div>
+      </a>
+    `).join('');
+    
+    // Tips
+    const tipArea = document.getElementById('tipList');
+    tipArea.innerHTML = data.guide.map(g => `<div style="margin-bottom:8px">${g}</div>`).join('');
+    
+    showToast(`Roadmap for ${role} generated successfully!`);
+  } catch (err) {
+    console.error(err);
+    showToast('Failed to generate roadmap', 'error');
+  }
+  setLoading('genBtn', false);
+}
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

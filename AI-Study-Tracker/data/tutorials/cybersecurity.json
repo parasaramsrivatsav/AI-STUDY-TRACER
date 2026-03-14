@@ -1,0 +1,52 @@
+{
+    "title": "Cyber Security Tutorial",
+    "lessons": [
+        {
+            "id": "cyber_intro",
+            "title": "Introduction to Cyber Security",
+            "content": "\n                    <h3>What is Cyber Security?</h3>\n                    <p>Cyber security is the practice of protecting systems, networks, and programs from digital attacks.</p>\n                    <p>These cyberattacks are usually aimed at accessing, changing, or destroying sensitive information; extorting money from users; or interrupting normal business processes.</p>\n                "
+        },
+        {
+            "id": "cyber_threats",
+            "title": "Common Cyber Threats",
+            "content": "\n                    <h3>Types of Cyber Threats</h3>\n                    <ul>\n                        <li><strong>Phishing:</strong> The practice of sending fraudulent emails that resemble emails from reputable sources.</li>\n                        <li><strong>Social Engineering:</strong> A tactic that adversaries use to trick you into revealing sensitive information.</li>\n                        <li><strong>Malware:</strong> Software designed to gain unauthorized access or to cause damage to a computer.</li>\n                        <li><strong>Ransomware:</strong> A type of malicious software designed to extort money by blocking access to files or the computer system until a ransom is paid.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "cyber_bestpractices",
+            "title": "Cyber Security Best Practices",
+            "content": "\n                    <h3>How to Protect Yourself</h3>\n                    <ul>\n                        <li>Use strong, unique passwords for all your accounts.</li>\n                        <li>Enable multi-factor authentication (MFA) whenever possible.</li>\n                        <li>Keep your software and operating systems up to date.</li>\n                        <li>Be cautious of unsolicited emails and links.</li>\n                    </ul>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "cyber_q1",
+            "question": "What does 'CIA' stand for in Cybersecurity?",
+            "options": ["Central Intelligence Agency", "Confidentiality, Integrity, Availability", "Control, Identification, Access", "Cyber Incident Analysis"],
+            "answer": 1
+        },
+        {
+            "id": "cyber_q2",
+            "question": "Which of the following is considered a 'Strong Password'?",
+            "options": ["123456", "password123", "P@ssw0rd!2024", "admin"],
+            "answer": 2
+        },
+        {
+            "id": "cyber_q3",
+            "question": "What is Phishing?",
+            "options": ["A type of network cable", "A social engineering attack to steal data", "A way to speed up the internet", "A database optimization technique"],
+            "answer": 1
+        },
+        {
+            "id": "cyber_q4",
+            "question": "What is the purpose of a Firewall?",
+            "options": ["To extinguish computer fires", "To block unauthorized access while permitting outward communication", "To store backup data", "To encrypt emails"],
+            "answer": 1
+        },
+        {
+            "id": "cyber_q5",
+            "question": "What is Multi-Factor Authentication (MFA)?",
+            "options": ["Using multiple passwords for one account", "Using at least two independent ways to verify identity", "Changing your password every month", "Sharing passwords with teammates"],
+            "answer": 1
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "title": "React Tutorial",
+    "lessons": [
+        {
+            "id": "react_intro",
+            "title": "React Introduction",
+            "content": "\n                    <h3>What is React?</h3>\n                    <ul>\n                        <li>React is a JavaScript library for building user interfaces.</li>\n                        <li>React is used to build single-page applications.</li>\n                        <li>React allows us to create reusable UI components.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "react_getstarted",
+            "title": "React Get Started",
+            "content": "\n                    <h3>React Render HTML</h3>\n                    <p>React's goal is in many ways to render HTML in a web page.</p>\n                    <p>React renders HTML to the web page by using a function called <code>createRoot()</code> and its method <code>render()</code>.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nconst container = document.getElementById('root');<br>\nconst root = ReactDOM.createRoot(container);<br>\nroot.render(&lt;p&gt;Hello&lt;/p&gt;);\n                        </div>\n                    </div>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "react_q1",
+            "question": "What is the correct way to write a React component?",
+            "options": ["function MyComponent() {}", "class MyComponent() {}", "new Component MyComponent {}", "create MyComponent {}"],
+            "answer": 0
+        },
+        {
+            "id": "react_q2",
+            "question": "Which hook is used to manage state in a functional component?",
+            "options": ["useEffect", "useContext", "useState", "useReducer"],
+            "answer": 2
+        },
+        {
+            "id": "react_q3",
+            "question": "What is JSX?",
+            "options": ["A style sheet language", "A syntax extension for JavaScript", "A database query language", "A type of server"],
+            "answer": 1
+        },
+        {
+            "id": "react_q4",
+            "question": "How do you pass data to a child component?",
+            "options": ["Using state", "Using props", "Using links", "Using events"],
+            "answer": 1
+        },
+        {
+            "id": "react_q5",
+            "question": "Which method is used to handle side effects in React functional components?",
+            "options": ["useState", "useEffect", "useMemo", "useCallback"],
+            "answer": 1
+        }
+    ]
+}

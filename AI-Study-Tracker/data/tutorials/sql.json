@@ -1,0 +1,102 @@
+{
+    "title": "SQL Tutorial",
+    "lessons": [
+        {
+            "id": "sql_intro",
+            "title": "SQL Introduction",
+            "content": "\n                    <h3>What is SQL?</h3>\n                    <ul>\n                        <li>SQL stands for Structured Query Language</li>\n                        <li>SQL lets you access and manipulate databases</li>\n                        <li>SQL became a standard of the American National Standards Institute (ANSI) in 1986, and of the International Organization for Standardization (ISO) in 1987</li>\n                    </ul>\n                    <h3>What Can SQL do?</h3>\n                    <ul>\n                        <li>SQL can execute queries against a database</li>\n                        <li>SQL can retrieve data from a database</li>\n                        <li>SQL can insert records in a database</li>\n                        <li>SQL can update records in a database</li>\n                        <li>SQL can delete records from a database</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "sql_syntax",
+            "title": "SQL Syntax",
+            "content": "\n                    <h3>Database Tables</h3>\n                    <p>A database most often contains one or more tables. Each table is identified by a name (e.g. \"Customers\" or \"Orders\"). Tables contain records (rows) with data.</p>\n                    <h3>SQL Statements</h3>\n                    <p>Most of the actions you need to perform on a database are done with SQL statements.</p>\n                    <p>The following SQL statement selects all the records in the \"Customers\" table:</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nSELECT * FROM Customers;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "sql_select",
+            "title": "SQL SELECT",
+            "content": "\n                    <h3>The SQL SELECT Statement</h3>\n                    <p>The <code>SELECT</code> statement is used to select data from a database.</p>\n                    <p>The data returned is stored in a result table, called the result-set.</p>\n                    <p><code>SELECT column1, column2, ... FROM table_name;</code></p>\n                    <div class=\"example-box\">\n                        <h4>Example</h4>\n                        <div class=\"code-block\">\nSELECT CustomerName, City FROM Customers;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "sql_distinct",
+            "title": "SQL SELECT DISTINCT",
+            "content": "\n                    <h3>The SQL SELECT DISTINCT Statement</h3>\n                    <p>The <code>SELECT DISTINCT</code> statement is used to return only distinct (different) values.</p>\n                    <p>Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.</p>\n                    <p><code>SELECT DISTINCT column1, column2, ... FROM table_name;</code></p>\n                "
+        },
+        {
+            "id": "sql_where",
+            "title": "SQL WHERE",
+            "content": "\n                    <h3>The SQL WHERE Clause</h3>\n                    <p>The <code>WHERE</code> clause is used to filter records.</p>\n                    <p>It is used to extract only those records that fulfill a specified condition.</p>\n                    <p><code>SELECT column1, column2, ... FROM table_name WHERE condition;</code></p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nSELECT * FROM Customers WHERE Country='Mexico';\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "sql_and_or_not",
+            "title": "SQL AND, OR, NOT",
+            "content": "\n                    <h3>The SQL AND, OR and NOT Operators</h3>\n                    <p>The <code>WHERE</code> clause can be combined with <code>AND</code>, <code>OR</code>, and <code>NOT</code> operators.</p>\n                    <ul>\n                        <li>The <code>AND</code> operator displays a record if all the conditions separated by <code>AND</code> are TRUE.</li>\n                        <li>The <code>OR</code> operator displays a record if any of the conditions separated by <code>OR</code> is TRUE.</li>\n                        <li>The <code>NOT</code> operator displays a record if the condition(s) is NOT TRUE.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "sql_orderby",
+            "title": "SQL ORDER BY",
+            "content": "\n                    <h3>The SQL ORDER BY Keyword</h3>\n                    <p>The <code>ORDER BY</code> keyword is used to sort the result-set in ascending or descending order.</p>\n                    <p>The <code>ORDER BY</code> keyword sorts the records in ascending order by default. To sort the records in descending order, use the <code>DESC</code> keyword.</p>\n                    <p><code>SELECT column1, column2, ... FROM table_name ORDER BY column1, column2, ... ASC|DESC;</code></p>\n                "
+        },
+        {
+            "id": "sql_insert",
+            "title": "SQL INSERT INTO",
+            "content": "\n                    <h3>The SQL INSERT INTO Statement</h3>\n                    <p>The <code>INSERT INTO</code> statement is used to insert new records in a table.</p>\n                    <p><code>INSERT INTO table_name (column1, column2, column3, ...) VALUES (value1, value2, value3, ...);</code></p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nINSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)<br>\nVALUES ('Cardinal', 'Tom B. Erichsen', 'Skagen 21', 'Stavanger', '4006', 'Norway');\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "sql_null",
+            "title": "SQL NULL Values",
+            "content": "\n                    <h3>What is a NULL Value?</h3>\n                    <p>A field with a NULL value is a field with no value.</p>\n                    <p>If a field in a table is optional, it is possible to insert a new record or update a record without adding a value to this field. Then, the field will be saved with a NULL value.</p>\n                    <p><strong>Note:</strong> A NULL value is different from a zero value or a field that contains spaces. A field with a NULL value is one that has been left blank during record creation!</p>\n                "
+        },
+        {
+            "id": "sql_update",
+            "title": "SQL UPDATE",
+            "content": "\n                    <h3>The SQL UPDATE Statement</h3>\n                    <p>The <code>UPDATE</code> statement is used to modify the existing records in a table.</p>\n                    <p><code>UPDATE table_name SET column1 = value1, column2 = value2, ... WHERE condition;</code></p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nUPDATE Customers<br>\nSET ContactName = 'Alfred Schmidt', City = 'Frankfurt'<br>\nWHERE CustomerID = 1;\n                        </div>\n                    </div>\n                    <p style=\"color:red;\"><strong>Warning:</strong> Be careful when updating records. If you omit the WHERE clause, all records will be updated!</p>\n                "
+        },
+        {
+            "id": "sql_delete",
+            "title": "SQL DELETE",
+            "content": "\n                    <h3>The SQL DELETE Statement</h3>\n                    <p>The <code>DELETE</code> statement is used to delete existing records in a table.</p>\n                    <p><code>DELETE FROM table_name WHERE condition;</code></p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nDELETE FROM Customers WHERE CustomerName='Alfreds Futterkiste';\n                        </div>\n                    </div>\n                    <p style=\"color:red;\"><strong>Warning:</strong> Be careful when deleting records. If you omit the WHERE clause, all records will be deleted!</p>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "sql_q1",
+            "question": "What does SQL stand for?",
+            "options": [
+                "Structured Question Language",
+                "Structured Query Language",
+                "Strong Query Language",
+                "Statistical Query Language"
+            ],
+            "answer": 1
+        },
+        {
+            "id": "sql_q2",
+            "question": "Which SQL statement is used to extract data from a database?",
+            "options": ["EXTRACT", "GET", "OPEN", "SELECT"],
+            "answer": 3
+        },
+        {
+            "id": "sql_q3",
+            "question": "Which SQL statement is used to update data in a database?",
+            "options": ["SAVE", "MODIFY", "UPDATE", "CHANGE"],
+            "answer": 2
+        },
+        {
+            "id": "sql_q4",
+            "question": "Which SQL statement is used to delete data from a database?",
+            "options": ["REMOVE", "COLLAPSE", "DELETE", "TRUNCATE"],
+            "answer": 2
+        },
+        {
+            "id": "sql_q5",
+            "question": "How do you select all the columns from a table named \"Persons\"?",
+            "options": [
+                "SELECT Persons",
+                "SELECT * FROM Persons",
+                "SELECT [all] FROM Persons",
+                "SELECT *.Persons"
+            ],
+            "answer": 1
+        }
+    ]
+}

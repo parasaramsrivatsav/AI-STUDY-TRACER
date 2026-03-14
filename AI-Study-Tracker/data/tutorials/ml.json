@@ -1,0 +1,47 @@
+{
+    "title": "Machine Learning Tutorial",
+    "lessons": [
+        {
+            "id": "ml_intro",
+            "title": "What is Machine Learning?",
+            "content": "\n                    <h3>Machine Learning Overview</h3>\n                    <p>Machine learning is a subfield of artificial intelligence (AI) that focuses on the development of algorithms that allow computers to learn from and make predictions or decisions based on data.</p>\n                "
+        },
+        {
+            "id": "ml_types",
+            "title": "Types of Machine Learning",
+            "content": "\n                    <h3>The Three Main Types</h3>\n                    <ul>\n                        <li><strong>Supervised Learning:</strong> The algorithm is trained on a labeled dataset.</li>\n                        <li><strong>Unsupervised Learning:</strong> The algorithm is trained on an unlabeled dataset.</li>\n                        <li><strong>Reinforcement Learning:</strong> The algorithm learns by trial and error using rewards and punishments.</li>\n                    </ul>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "ml_q1",
+            "question": "Which type of learning involves training a model on labeled data?",
+            "options": ["Supervised Learning", "Unsupervised Learning", "Reinforcement Learning", "Deep Learning"],
+            "answer": 0
+        },
+        {
+            "id": "ml_q2",
+            "question": "Overfitting occurs when a model:",
+            "options": ["Performs poorly on training data", "Learns the noise in the training data instead of the pattern", "Is too simple for the data", "Has too few parameters"],
+            "answer": 1
+        },
+        {
+            "id": "ml_q3",
+            "question": "Which algorithm is used for binary classification?",
+            "options": ["Linear Regression", "K-Means", "Logistic Regression", "Principal Component Analysis"],
+            "answer": 2
+        },
+        {
+            "id": "ml_q4",
+            "question": "What is a 'Neural Network' loosely modeled after?",
+            "options": ["A spider web", "The human brain", "A tree structure", "A social network"],
+            "answer": 1
+        },
+        {
+            "id": "ml_q5",
+            "question": "Which metric is commonly used to evaluate a regression model?",
+            "options": ["Accuracy", "F1-Score", "Mean Squared Error (MSE)", "Precision"],
+            "answer": 2
+        }
+    ]
+}

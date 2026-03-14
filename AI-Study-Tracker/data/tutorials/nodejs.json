@@ -1,0 +1,52 @@
+{
+    "title": "Node.js Tutorial",
+    "lessons": [
+        {
+            "id": "node_intro",
+            "title": "Node.js Introduction",
+            "content": "\n                    <h3>What is Node.js?</h3>\n                    <ul>\n                        <li>Node.js is an open source server environment.</li>\n                        <li>Node.js is free.</li>\n                        <li>Node.js runs on various platforms (Windows, Linux, Unix, Mac OS X, etc.).</li>\n                        <li>Node.js uses JavaScript on the server.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "node_getstarted",
+            "title": "Node.js Get Started",
+            "content": "\n                    <h3>Download Node.js</h3>\n                    <p>Go to the official Node.js website and download the installer.</p>\n                    <h3>Node.js App</h3>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nvar http = require('http');\n\nhttp.createServer(function (req, res) {\n&nbsp;&nbsp;res.writeHead(200, {'Content-Type': 'text/plain'});\n&nbsp;&nbsp;res.end('Hello World!');\n}).listen(8080);\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "node_modules",
+            "title": "Node.js Modules",
+            "content": "\n                    <h3>What are Modules in Node.js?</h3>\n                    <p>Consider modules to be the same as JavaScript libraries.</p>\n                    <p>A set of functions you want to include in your application.</p>\n                    <p>To include a module, use the <code>require()</code> function with the name of the module:</p>\n                    <p><code>var http = require('http');</code></p>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "node_q1",
+            "question": "Which of the following describes Node.js correctly?",
+            "options": ["A web browser", "A programming language", "A JavaScript runtime built on V8", "A database engine"],
+            "answer": 2
+        },
+        {
+            "id": "node_q2",
+            "question": "Which command is used to initialize a new Node.js project?",
+            "options": ["npm init", "node init", "npm start", "node start"],
+            "answer": 0
+        },
+        {
+            "id": "node_q3",
+            "question": "Which core module is used to handle file paths in Node.js?",
+            "options": ["fs", "path", "http", "url"],
+            "answer": 1
+        },
+        {
+            "id": "node_q4",
+            "question": "How do you import a module in Node.js using CommonJS?",
+            "options": ["import module from 'path'", "include('path')", "require('path')", "using 'path'"],
+            "answer": 2
+        },
+        {
+            "id": "node_q5",
+            "question": "Which method is used to read the content of a file asynchronously in Node.js?",
+            "options": ["fs.read()", "fs.readFileSync()", "fs.readFile()", "fs.open()"],
+            "answer": 2
+        }
+    ]
+}

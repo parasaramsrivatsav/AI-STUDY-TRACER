@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Study Session - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><h2>AI Study Tracker</h2><span>Smart Learning</span></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Study</div>
+        <a href="add_session.html" class="nav-item active"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">AI Features</div>
+        <a href="../ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="../ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="../ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="../ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Analytics</div>
+        <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text">S</div>
+        <div class="user-info"><div class="user-name user-display-name">Student</div><div class="user-role">Active Learner</div></div>
+      </a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1>➕ Add Study Session</h1>
+        <div class="breadcrumb">Study → Log New Session</div>
+      </div>
+      <div class="top-bar-right">
+        <a href="study_history.html" class="btn btn-secondary btn-sm">📚 View History</a>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div style="max-width:640px;margin:0 auto">
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">📝 Log Your Study Session</div>
+              <div class="card-subtitle">Track what, when, and how well you studied</div>
+            </div>
+          </div>
+          <div id="alert-area"></div>
+          <form id="sessionForm">
+            <div class="form-group">
+              <label class="form-label">Subject Name *</label>
+              <input type="text" id="subject" class="form-input" placeholder="e.g., Mathematics, Physics, History..." required list="subjectSuggestions">
+              <datalist id="subjectSuggestions">
+                <option value="Mathematics">
+                <option value="Physics">
+                <option value="Chemistry">
+                <option value="Biology">
+                <option value="Computer Science">
+                <option value="English">
+                <option value="History">
+                <option value="Economics">
+                <option value="Statistics">
+              </datalist>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Date *</label>
+                <input type="date" id="date" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Duration (hours) *</label>
+                <input type="number" id="duration" class="form-input" placeholder="e.g., 1.5" min="0.1" max="12" step="0.1" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Start Time *</label>
+                <input type="time" id="startTime" class="form-input" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">End Time *</label>
+                <input type="time" id="endTime" class="form-input" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Self Rating: <span id="ratingDisplay" style="color:var(--accent-orange);font-weight:700">3 ⭐</span></label>
+              <input type="range" id="selfRating" class="form-range" min="1" max="5" value="3">
+              <div class="range-labels"><span>1 - Poor</span><span>2</span><span>3 - Average</span><span>4</span><span>5 - Excellent</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Focus Level: <span id="focusDisplay" style="color:var(--accent-blue);font-weight:700">7/10</span></label>
+              <input type="range" id="focusLevel" class="form-range" min="1" max="10" value="7">
+              <div class="range-labels"><span>1 - Distracted</span><span>5 - Moderate</span><span>10 - Deep Focus</span></div>
+            </div>
+            <div style="display:flex;gap:12px;margin-top:8px">
+              <button type="submit" id="submitBtn" class="btn btn-primary" style="flex:1">
+                ✅ Save Session
+              </button>
+              <button type="reset" class="btn btn-secondary">🔄 Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../js/charts.js"></script>
+<script>
+requireAuth().then(u => { if (u) setUserDisplay(u.username); });
+
+// Set today's date
+document.getElementById('date').valueAsDate = new Date();
+
+// Update range labels
+document.getElementById('selfRating').addEventListener('input', e => {
+  const stars = ['', '1 ⭐', '2 ⭐⭐', '3 ⭐⭐⭐', '4 ⭐⭐⭐⭐', '5 ⭐⭐⭐⭐⭐'];
+  document.getElementById('ratingDisplay').textContent = stars[e.target.value];
+});
+document.getElementById('focusLevel').addEventListener('input', e => {
+  document.getElementById('focusDisplay').textContent = e.target.value + '/10';
+});
+
+// Auto-calculate duration
+document.getElementById('startTime').addEventListener('change', calcDuration);
+document.getElementById('endTime').addEventListener('change', calcDuration);
+function calcDuration() {
+  const s = document.getElementById('startTime').value;
+  const e = document.getElementById('endTime').value;
+  if (s && e) {
+    const [sh, sm] = s.split(':').map(Number);
+    const [eh, em] = e.split(':').map(Number);
+    let diff = (eh * 60 + em) - (sh * 60 + sm);
+    if (diff < 0) diff += 24 * 60;
+    document.getElementById('duration').value = (diff / 60).toFixed(2);
+  }
+}
+
+document.getElementById('sessionForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const payload = {
+    subject: document.getElementById('subject').value,
+    date: document.getElementById('date').value,
+    start_time: document.getElementById('startTime').value,
+    end_time: document.getElementById('endTime').value,
+    duration_hours: parseFloat(document.getElementById('duration').value),
+    self_rating: parseInt(document.getElementById('selfRating').value),
+    focus_level: parseInt(document.getElementById('focusLevel').value)
+  };
+  setLoading('submitBtn', true, 'Saving...');
+  try {
+    await api('/add_session', 'POST', payload);
+    showAlert('alert-area', `✅ "${payload.subject}" session saved successfully!`, 'success');
+    document.getElementById('sessionForm').reset();
+    document.getElementById('date').valueAsDate = new Date();
+    document.getElementById('ratingDisplay').textContent = '3 ⭐';
+    document.getElementById('focusDisplay').textContent = '7/10';
+  } catch (err) {
+    showAlert('alert-area', err.error || 'Failed to save session.', 'error');
+  }
+  setLoading('submitBtn', false);
+});
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

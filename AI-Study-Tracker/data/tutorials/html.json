@@ -1,0 +1,122 @@
+{
+    "title": "HTML Tutorial",
+    "lessons": [
+        {
+            "id": "html_intro",
+            "title": "HTML Introduction",
+            "content": "\n                    <h3>What is HTML?</h3>\n                    <p>HTML is the standard markup language for Web pages.</p>\n                    <p>With HTML you can create your own Website.</p>\n                    <p>HTML stands for Hyper Text Markup Language.</p>\n                    <p>HTML describes the structure of a Web page.</p>\n                    <p>HTML consists of a series of elements.</p>\n                    <p>HTML elements tell the browser how to display the content.</p>\n                    <div class=\"example-box\">\n                        <h4>A Simple HTML Document</h4>\n                        <div class=\"code-block\">\n&lt;!DOCTYPE html&gt;<br>\n&lt;html&gt;<br>\n&lt;head&gt;<br>\n&lt;title&gt;Page Title&lt;/title&gt;<br>\n&lt;/head&gt;<br>\n&lt;body&gt;<br>\n<br>\n&lt;h1&gt;My First Heading&lt;/h1&gt;<br>\n&lt;p&gt;My first paragraph.&lt;/p&gt;<br>\n<br>\n&lt;/body&gt;<br>\n&lt;/html&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_editors",
+            "title": "HTML Editors",
+            "content": "\n                    <h3>Write HTML Using Notepad or TextEdit</h3>\n                    <p>Web pages can be created and modified by using professional HTML editors.</p>\n                    <p>However, for learning HTML we recommend a simple text editor like Notepad (PC) or TextEdit (Mac).</p>\n                    <p>We believe that using a simple text editor is a good way to learn HTML.</p>\n                    <p>Follow the steps below to create your first web page with Notepad or TextEdit.</p>\n                    <ol>\n                        <li>Open Notepad (PC)</li>\n                        <li>Write Some HTML</li>\n                        <li>Save the HTML Page</li>\n                        <li>View the HTML Page in Your Browser</li>\n                    </ol>\n                "
+        },
+        {
+            "id": "html_basic",
+            "title": "HTML Basic Examples",
+            "content": "\n                    <h3>HTML Documents</h3>\n                    <p>All HTML documents must start with a document type declaration: &lt;!DOCTYPE html&gt;.</p>\n                    <p>The HTML document itself begins with &lt;html&gt; and ends with &lt;/html&gt;.</p>\n                    <p>The visible part of the HTML document is between &lt;body&gt; and &lt;/body&gt;.</p>\n                    <div class=\"example-box\">\n                        <h4>Example</h4>\n                        <div class=\"code-block\">\n&lt;!DOCTYPE html&gt;<br>\n&lt;html&gt;<br>\n&lt;body&gt;<br>\n<br>\n&lt;h1&gt;My First Heading&lt;/h1&gt;<br>\n&lt;p&gt;My first paragraph.&lt;/p&gt;<br>\n<br>\n&lt;/body&gt;<br>\n&lt;/html&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_elements",
+            "title": "HTML Elements",
+            "content": "\n                    <h3>HTML Elements</h3>\n                    <p>An HTML element is defined by a start tag, some content, and an end tag:</p>\n                    <p><code>&lt;tagname&gt;Content goes here...&lt;/tagname&gt;</code></p>\n                    <p>The HTML <strong>element</strong> is everything from the start tag to the end tag:</p>\n                    <p><code>&lt;h1&gt;My First Heading&lt;/h1&gt;</code></p>\n                    <p><code>&lt;p&gt;My first paragraph.&lt;/p&gt;</code></p>\n                "
+        },
+        {
+            "id": "html_attributes",
+            "title": "HTML Attributes",
+            "content": "\n                    <h3>HTML Attributes</h3>\n                    <ul>\n                        <li>All HTML elements can have <strong>attributes</strong></li>\n                        <li>Attributes provide <strong>additional information</strong> about elements</li>\n                        <li>Attributes are always specified in <strong>the start tag</strong></li>\n                        <li>Attributes usually come in name/value pairs like: <strong>name=\"value\"</strong></li>\n                    </ul>\n                    <h3>The href Attribute</h3>\n                    <p>The <code>&lt;a&gt;</code> tag defines a hyperlink. The <code>href</code> attribute specifies the URL of the page the link goes to:</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;a href=\"https://www.w3schools.com\"&gt;Visit W3Schools&lt;/a&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_headings",
+            "title": "HTML Headings",
+            "content": "\n                    <h3>HTML Headings</h3>\n                    <p>HTML headings are defined with the &lt;h1&gt; to &lt;h6&gt; tags.</p>\n                    <p>&lt;h1&gt; defines the most important heading. &lt;h6&gt; defines the least important heading.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;h1&gt;Heading 1&lt;/h1&gt;<br>\n&lt;h2&gt;Heading 2&lt;/h2&gt;<br>\n&lt;h3&gt;Heading 3&lt;/h3&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_paragraphs",
+            "title": "HTML Paragraphs",
+            "content": "\n                    <h3>HTML Paragraphs</h3>\n                    <p>The HTML <code>&lt;p&gt;</code> element defines a paragraph.</p>\n                    <p>A paragraph always starts on a new line, and browsers automatically add some white space (a margin) before and after a paragraph.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;p&gt;This is a paragraph.&lt;/p&gt;<br>\n&lt;p&gt;This is another paragraph.&lt;/p&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_styles",
+            "title": "HTML Styles",
+            "content": "\n                    <h3>The HTML Style Attribute</h3>\n                    <p>The HTML <code>style</code> attribute is used to add styles to an element, such as color, font, size, and more.</p>\n                    <div class=\"example-box\">\n                        <h4>Example</h4>\n                        <div class=\"code-block\">\n&lt;p style=\"color:red;\"&gt;I am red&lt;/p&gt;<br>\n&lt;p style=\"color:blue;\"&gt;I am blue&lt;/p&gt;<br>\n&lt;p style=\"font-size:50px;\"&gt;I am big&lt;/p&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_formatting",
+            "title": "HTML Formatting",
+            "content": "\n                    <h3>HTML Text Formatting</h3>\n                    <p>HTML contains several elements for defining text with a special meaning.</p>\n                    <ul>\n                        <li><code>&lt;b&gt;</code> - Bold text</li>\n                        <li><code>&lt;strong&gt;</code> - Important text</li>\n                        <li><code>&lt;i&gt;</code> - Italic text</li>\n                        <li><code>&lt;em&gt;</code> - Emphasized text</li>\n                        <li><code>&lt;mark&gt;</code> - Marked text</li>\n                        <li><code>&lt;small&gt;</code> - Smaller text</li>\n                        <li><code>&lt;del&gt;</code> - Deleted text</li>\n                        <li><code>&lt;ins&gt;</code> - Inserted text</li>\n                        <li><code>&lt;sub&gt;</code> - Subscript text</li>\n                        <li><code>&lt;sup&gt;</code> - Superscript text</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "html_quotations",
+            "title": "HTML Quotations",
+            "content": "\n                    <h3>HTML Quotation and Citation Elements</h3>\n                    <p>The HTML <code>&lt;blockquote&gt;</code> element defines a section that is quoted from another source.</p>\n                    <p>The HTML <code>&lt;q&gt;</code> element defines a short inline quotation.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;p&gt;Browsers usually indent blockquote elements:&lt;/p&gt;<br>\n&lt;blockquote cite=\"http://www.worldwildlife.org/who/index.html\"&gt;<br>\nFor 50 years, WWF has been protecting the future of nature.<br>\n&lt;/blockquote&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_comments",
+            "title": "HTML Comments",
+            "content": "\n                    <h3>HTML Comment Tags</h3>\n                    <p>You can add comments to your HTML source by using the following syntax:</p>\n                    <p><code>&lt;!-- Write your comments here --&gt;</code></p>\n                    <p>Notice that there is an exclamation point (!) in the start tag, but not in the end tag.</p>\n                    <p>Comments are not displayed by the browser, but they can help document your HTML source code.</p>\n                "
+        },
+        {
+            "id": "html_colors",
+            "title": "HTML Colors",
+            "content": "\n                    <h3>HTML Colors</h3>\n                    <p>HTML colors are specified with predefined color names, or with RGB, HEX, HSL, RGBA, or HSLA values.</p>\n                    <div class=\"example-box\">\n                        <h4>Color Names</h4>\n                        <div class=\"code-block\">\n&lt;h1 style=\"background-color:Tomato;\"&gt;Tomato&lt;/h1&gt;<br>\n&lt;h1 style=\"background-color:Orange;\"&gt;Orange&lt;/h1&gt;<br>\n&lt;h1 style=\"background-color:DodgerBlue;\"&gt;DodgerBlue&lt;/h1&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_links",
+            "title": "HTML Links",
+            "content": "\n                    <h3>HTML Links - Hyperlinks</h3>\n                    <p>HTML links are hyperlinks. You can click on a link and jump to another document.</p>\n                    <p>The HTML <code>&lt;a&gt;</code> tag defines a hyperlink. It has the following syntax:</p>\n                    <p><code>&lt;a href=\"url\"&gt;link text&lt;/a&gt;</code></p>\n                    <div class=\"example-box\">\n                        <h4>Example</h4>\n                        <div class=\"code-block\">\n&lt;a href=\"https://www.w3schools.com/\"&gt;Visit W3Schools.com!&lt;/a&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_images",
+            "title": "HTML Images",
+            "content": "\n                    <h3>HTML Images Syntax</h3>\n                    <p>The HTML <code>&lt;img&gt;</code> tag is used to embed an image in a web page.</p>\n                    <p>Images are not technically inserted into a web page; images are linked to web pages. The <code>&lt;img&gt;</code> tag creates a holding space for the referenced image.</p>\n                    <p>The <code>&lt;img&gt;</code> tag is empty, it contains attributes only, and does not have a closing tag.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;img src=\"img_chania.jpg\" alt=\"Flowers in Chania\"&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_tables",
+            "title": "HTML Tables",
+            "content": "\n                    <h3>HTML Tables</h3>\n                    <p>HTML tables allow web developers to arrange data into rows and columns.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;table&gt;<br>\n&nbsp;&nbsp;&lt;tr&gt;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Company&lt;/th&gt;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Contact&lt;/th&gt;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&lt;th&gt;Country&lt;/th&gt;<br>\n&nbsp;&nbsp;&lt;/tr&gt;<br>\n&nbsp;&nbsp;&lt;tr&gt;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Alfreds Futterkiste&lt;/td&gt;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Maria Anders&lt;/td&gt;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&lt;td&gt;Germany&lt;/td&gt;<br>\n&nbsp;&nbsp;&lt;/tr&gt;<br>\n&lt;/table&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "html_lists",
+            "title": "HTML Lists",
+            "content": "\n                    <h3>HTML Lists</h3>\n                    <p>HTML lists allow web developers to group a set of related items in lists.</p>\n                    <h3>Unordered HTML List</h3>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;ul&gt;<br>\n&nbsp;&nbsp;&lt;li&gt;Coffee&lt;/li&gt;<br>\n&nbsp;&nbsp;&lt;li&gt;Tea&lt;/li&gt;<br>\n&nbsp;&nbsp;&lt;li&gt;Milk&lt;/li&gt;<br>\n&lt;/ul&gt;\n                        </div>\n                    </div>\n                    <h3>Ordered HTML List</h3>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;ol&gt;<br>\n&nbsp;&nbsp;&lt;li&gt;Coffee&lt;/li&gt;<br>\n&nbsp;&nbsp;&lt;li&gt;Tea&lt;/li&gt;<br>\n&nbsp;&nbsp;&lt;li&gt;Milk&lt;/li&gt;<br>\n&lt;/ol&gt;\n                        </div>\n                    </div>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "html_q1",
+            "question": "What is the correct HTML element for the largest heading?",
+            "options": ["&lt;h6&gt;", "&lt;heading&gt;", "&lt;h1&gt;", "&lt;head&gt;"],
+            "answer": 2
+        },
+        {
+            "id": "html_q2",
+            "question": "What is the correct HTML for creating a hyperlink?",
+            "options": [
+                "&lt;a name=\"\"&gt;W3Schools.com&lt;/a&gt;",
+                "&lt;a href=\"http://www.w3schools.com\"&gt;W3Schools&lt;/a&gt;",
+                "&lt;a&gt;http://www.w3schools.com&lt;/a&gt;",
+                "&lt;url&gt;http://www.w3schools.com&lt;/url&gt;"
+            ],
+            "answer": 1
+        },
+        {
+            "id": "html_q3",
+            "question": "Choose the correct HTML element to define important text:",
+            "options": ["&lt;important&gt;", "&lt;i&gt;", "&lt;strong&gt;", "&lt;b&gt;"],
+            "answer": 2
+        },
+        {
+            "id": "html_q4",
+            "question": "Which character is used to indicate an end tag?",
+            "options": ["^", "/", "*", "&lt;"],
+            "answer": 1
+        },
+        {
+            "id": "html_q5",
+            "question": "How can you make a numbered list?",
+            "options": ["&lt;dl&gt;", "&lt;ul&gt;", "&lt;list&gt;", "&lt;ol&gt;"],
+            "answer": 3
+        }
+    ]
+}

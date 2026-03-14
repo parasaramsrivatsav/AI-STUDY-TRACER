@@ -1,0 +1,107 @@
+{
+    "title": "JavaScript Tutorial",
+    "lessons": [
+        {
+            "id": "js_intro",
+            "title": "JS Introduction",
+            "content": "\n                    <h3>What is JavaScript?</h3>\n                    <ul>\n                        <li>JavaScript is the world's most popular programming language.</li>\n                        <li>JavaScript is the programming language of the Web.</li>\n                        <li>JavaScript is easy to learn.</li>\n                    </ul>\n                    <div class=\"example-box\">\n                        <h4>JavaScript Example</h4>\n                        <div class=\"code-block\">\n&lt;button onclick=\"document.getElementById('demo').innerHTML = Date()\"&gt;<br>\nClick me to display Date and Time.<br>\n&lt;/button&gt;<br>\n<br>\n&lt;p id=\"demo\"&gt;&lt;/p&gt;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "js_whereto",
+            "title": "JS Where To",
+            "content": "\n                    <h3>The &lt;script&gt; Tag</h3>\n                    <p>In HTML, JavaScript code is inserted between <code>&lt;script&gt;</code> and <code>&lt;/script&gt;</code> tags.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n&lt;script&gt;<br>\ndocument.getElementById(\"demo\").innerHTML = \"My First JavaScript\";<br>\n&lt;/script&gt;\n                        </div>\n                    </div>\n                    <h3>JavaScript in &lt;head&gt; or &lt;body&gt;</h3>\n                    <p>You can place any number of scripts in an HTML document.</p>\n                    <p>Scripts can be placed in the <code>&lt;body&gt;</code>, or in the <code>&lt;head&gt;</code> section of an HTML page, or in both.</p>\n                "
+        },
+        {
+            "id": "js_output",
+            "title": "JS Output",
+            "content": "\n                    <h3>JavaScript Display Possibilities</h3>\n                    <p>JavaScript can \"display\" data in different ways:</p>\n                    <ul>\n                        <li>Writing into an HTML element, using <code>innerHTML</code>.</li>\n                        <li>Writing into the HTML output using <code>document.write()</code>.</li>\n                        <li>Writing into an alert box, using <code>window.alert()</code>.</li>\n                        <li>Writing into the browser console, using <code>console.log()</code>.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "js_statements",
+            "title": "JS Statements",
+            "content": "\n                    <h3>JavaScript Programs</h3>\n                    <p>A <strong>computer program</strong> is a list of \"instructions\" to be \"executed\" by a computer.</p>\n                    <p>In a programming language, these programming instructions are called <strong>statements</strong>.</p>\n                    <p>JavaScript statements are composed of: Values, Operators, Expressions, Keywords, and Comments.</p>\n                    <p>Most JavaScript programs contain many JavaScript statements. The statements are executed, one by one, in the same order as they are written.</p>\n                "
+        },
+        {
+            "id": "js_syntax",
+            "title": "JS Syntax",
+            "content": "\n                    <h3>JavaScript Syntax</h3>\n                    <p>JavaScript syntax is the set of rules, how JavaScript programs are constructed:</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n// How to create variables:<br>\nvar x, y, z;<br>\n<br>\n// How to assign values:<br>\nx = 5; y = 6;<br>\nz = x + y;\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "js_comments",
+            "title": "JS Comments",
+            "content": "\n                    <h3>JavaScript Comments</h3>\n                    <p>JavaScript comments can be used to explain JavaScript code, and to make it more readable.</p>\n                    <p>JavaScript comments can also be used to prevent execution, when testing alternative code.</p>\n                    <p>Single line comments start with <code>//</code>.</p>\n                    <p>Multi-line comments start with <code>/*</code> and end with <code>*/</code>.</p>\n                "
+        },
+        {
+            "id": "js_variables",
+            "title": "JS Variables",
+            "content": "\n                    <h3>JavaScript Variables</h3>\n                    <p>Variables are containers for storing data (storing data values).</p>\n                    <p>In JavaScript, there are 4 ways to declare a variable:</p>\n                    <ul>\n                        <li>Using <code>var</code></li>\n                        <li>Using <code>let</code></li>\n                        <li>Using <code>const</code></li>\n                        <li>Using nothing</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "js_let",
+            "title": "JS Let",
+            "content": "\n                    <h3>The let Keyword</h3>\n                    <p>The <code>let</code> keyword was introduced in ES6 (2015).</p>\n                    <p>Variables declared with <code>let</code> have <strong>Block Scope</strong>.</p>\n                    <p>Variables declared with <code>let</code> must be <strong>Declared</strong> before use.</p>\n                    <p>Variables declared with <code>let</code> cannot be <strong>Redeclared</strong> in the same scope.</p>\n                "
+        },
+        {
+            "id": "js_const",
+            "title": "JS Const",
+            "content": "\n                    <h3>The const Keyword</h3>\n                    <p>The <code>const</code> keyword was introduced in ES6 (2015).</p>\n                    <p>Variables defined with <code>const</code> cannot be <strong>Redeclared</strong>.</p>\n                    <p>Variables defined with <code>const</code> cannot be <strong>Reassigned</strong>.</p>\n                    <p>Variables defined with <code>const</code> have <strong>Block Scope</strong>.</p>\n                "
+        },
+        {
+            "id": "js_operators",
+            "title": "JS Operators",
+            "content": "\n                    <h3>JavaScript Operators</h3>\n                    <p>JavaScript operators are used to perform different types of mathematical and logical computations.</p>\n                    <ul>\n                        <li><strong>Arithmetic Operators:</strong> <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>%</code>, etc.</li>\n                        <li><strong>Assignment Operators:</strong> <code>=</code>, <code>+=</code>, <code>-=</code>, etc.</li>\n                        <li><strong>Comparison Operators:</strong> <code>==</code>, <code>===</code>, <code>!=</code>, etc.</li>\n                        <li><strong>Logical Operators:</strong> <code>&&</code>, <code>||</code>, <code>!</code>.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "js_arithmetic",
+            "title": "JS Arithmetic",
+            "content": "\n                    <h3>JavaScript Arithmetic Operators</h3>\n                    <p>Arithmetic operators perform arithmetic on numbers (literals or variables).</p>\n                    <ul>\n                        <li><code>+</code> (Addition)</li>\n                        <li><code>-</code> (Subtraction)</li>\n                        <li><code>*</code> (Multiplication)</li>\n                        <li><code>**</code> (Exponentiation - ES2016)</li>\n                        <li><code>/</code> (Division)</li>\n                        <li><code>%</code> (Modulus - Remainder)</li>\n                        <li><code>++</code> (Increment)</li>\n                        <li><code>--</code> (Decrement)</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "js_assignment",
+            "title": "JS Assignment",
+            "content": "\n                    <h3>JavaScript Assignment Operators</h3>\n                    <p>Assignment operators assign values to JavaScript variables.</p>\n                    <p>The **Assignment Operator (<code>=</code>)** assigns a value to a variable.</p>\n                    <p>The **Addition Assignment Operator (<code>+=</code>)** adds a value to a variable.</p>\n                "
+        },
+        {
+            "id": "js_datatypes",
+            "title": "JS Data Types",
+            "content": "\n                    <h3>JavaScript Data Types</h3>\n                    <p>JavaScript variables can hold different <strong>data types</strong>: numbers, strings, objects and more:</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nlet length = 16;          // Number<br>\nlet lastName = \"Johnson\"; // String<br>\nlet x = {firstName:\"John\", lastName:\"Doe\"}; // Object\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "js_functions",
+            "title": "JS Functions",
+            "content": "\n                    <h3>JavaScript Functions</h3>\n                    <p>A JavaScript function is a block of code designed to perform a particular task.</p>\n                    <p>A JavaScript function is executed when \"something\" invokes it (calls it).</p>\n                    <div class=\"example-box\">\n                        <h4>Example</h4>\n                        <div class=\"code-block\">\nfunction myFunction(p1, p2) {\n&nbsp;&nbsp;return p1 * p2;   // The function returns the product of p1 and p2\n}\n                        </div>\n                    </div>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "js_q1",
+            "question": "Inside which HTML element do we put the JavaScript?",
+            "options": ["&lt;javascript&gt;", "&lt;scripting&gt;", "&lt;js&gt;", "&lt;script&gt;"],
+            "answer": 3
+        },
+        {
+            "id": "js_q2",
+            "question": "How do you write 'Hello World' in an alert box?",
+            "options": ["msg(\"Hello World\");", "alert(\"Hello World\");", "alertBox(\"Hello World\");", "msgBox(\"Hello World\");"],
+            "answer": 1
+        },
+        {
+            "id": "js_q3",
+            "question": "How do you create a function in JavaScript?",
+            "options": ["function:myFunction()", "function myFunction()", "function = myFunction()", "def myFunction()"],
+            "answer": 1
+        },
+        {
+            "id": "js_q4",
+            "question": "How to write an IF statement in JavaScript?",
+            "options": ["if i = 5 then", "if (i == 5)", "if i == 5 then", "if i = 5"],
+            "answer": 1
+        },
+        {
+            "id": "js_q5",
+            "question": "Which operator is used to assign a value to a variable?",
+            "options": ["*", "-", "=", "x"],
+            "answer": 2
+        }
+    ]
+}

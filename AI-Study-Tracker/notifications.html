@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notifications - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chatbot-widget.css">
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="notifications.html" class="nav-item active"><span class="nav-icon">🔔</span><span>Notifications</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">AI Features</div>
+        <a href="ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span> Strategic Roadmap</a>
+        <a href="ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="profile.html" class="user-card"><div class="user-avatar user-avatar-text">S</div><div class="user-info"><div class="user-name user-display-name">Student</div></div></a>
+      <button onclick="logoutRoot()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>🔔 Notifications</h1><div class="breadcrumb">Alerts & Recommendations</div></div>
+      <div class="top-bar-right">
+        <button onclick="markAllRead()" class="btn btn-secondary btn-sm">✅ Mark All Read</button>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">All Notifications</div>
+          <div id="unreadCount" class="badge badge-danger" style="display:none">0 unread</div>
+        </div>
+        <div id="notifArea" class="loading-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="js/charts.js"></script>
+<script>
+requireAuthRoot().then(u => { if (u) { setUserDisplay(u.username); loadNotifications(); }});
+
+async function loadNotifications() {
+  try {
+    const data = await api('/get_notifications');
+    const unread = data.unread_count;
+    if (unread > 0) {
+      document.getElementById('unreadCount').textContent = unread + ' unread';
+      document.getElementById('unreadCount').style.display = 'inline-flex';
+    }
+
+    const notifArea = document.getElementById('notifArea');
+    if (data.notifications.length === 0) {
+      notifArea.innerHTML = '<div class="empty-state"><div class="empty-icon">🔔</div><h3>All caught up!</h3><p>No notifications yet. Keep studying and we\'ll send you updates.</p></div>';
+      return;
+    }
+
+    const typeIcon = { success: '✅', warning: '⚠️', error: '❌', info: 'ℹ️' };
+    notifArea.innerHTML = `<div class="notif-list">
+      ${data.notifications.map(n => {
+        const icon = typeIcon[n.type] || 'ℹ️';
+        const dt = new Date(n.created_at).toLocaleString('en-US', { month:'short', day:'numeric', hour:'numeric', minute:'2-digit' });
+        return `<div class="notif-item ${n.is_read ? '' : 'unread'}">
+          <span class="notif-icon">${icon}</span>
+          <div class="notif-content">
+            <div class="notif-message">${n.message}</div>
+            <div class="notif-time">🕐 ${dt}</div>
+          </div>
+          ${!n.is_read ? '<span class="badge badge-info" style="margin-left:auto;flex-shrink:0">New</span>' : ''}
+        </div>`;
+      }).join('')}
+    </div>`;
+  } catch { document.getElementById('notifArea').innerHTML = '<p style="color:var(--accent-red)">Failed to load notifications.</p>'; }
+}
+
+async function markAllRead() {
+  await api('/mark_notifications_read', 'POST');
+  showToast('All notifications marked as read!', 'success');
+  document.getElementById('unreadCount').style.display = 'none';
+  document.querySelectorAll('.notif-item.unread').forEach(el => { el.classList.remove('unread'); });
+  document.querySelectorAll('.badge-info').forEach(el => el.remove());
+}
+</script>
+  <script src="js/chatbot-widget.js"></script>
+</body>
+</html>

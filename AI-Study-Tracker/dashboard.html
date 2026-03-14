@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chatbot-widget.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<body>
+  <div class="layout">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><h2>AI Study Tracker</h2><span>Smart Learning</span></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item active"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span><span class="nav-badge notif-nav-count" style="display:none">0</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Study</div>
+        <a href="study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">AI Features</div>
+        <a href="ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Analytics</div>
+        <a href="progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text">S</div>
+        <div class="user-info"><div class="user-name user-display-name">Student</div><div class="user-role">Active Learner</div></div>
+      </a>
+      <button onclick="logoutRoot()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1>📊 Dashboard</h1>
+        <div class="breadcrumb">Your learning overview</div>
+      </div>
+      <div class="top-bar-right">
+        <a href="notifications.html" class="icon-btn" title="Notifications">🔔<span class="badge notif-badge" style="display:none">0</span></a>
+        <a href="study/add_session.html" class="btn btn-primary btn-sm">➕ Add Session</a>
+      </div>
+    </div>
+
+    <div class="page-content" id="mainContent">
+      <!-- Loading -->
+      <div class="loading-state" id="loadingState">
+        <div class="spinner"></div>
+        <p style="margin-top:16px;font-size:13px">Loading your dashboard...</p>
+      </div>
+
+      <div id="dashboardContent" style="display:none">
+        <!-- Metrics -->
+        <div class="metrics-grid">
+          <div class="metric-card blue">
+            <div class="metric-icon blue">⏱️</div>
+            <div class="metric-value gradient-text" id="totalHours">0</div>
+            <div class="metric-label">Total Study Hours</div>
+          </div>
+          <div class="metric-card purple">
+            <div class="metric-icon purple">📚</div>
+            <div class="metric-value" style="background:linear-gradient(135deg,#a855f7,#ec4899);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent" id="subjectsCount">0</div>
+            <div class="metric-label">Subjects Studied</div>
+          </div>
+          <div class="metric-card green">
+            <div class="metric-icon green">🤖</div>
+            <div class="metric-value" style="background:linear-gradient(135deg,#10b981,#22d3ee);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent" id="productivityScore">0%</div>
+            <div class="metric-label">Productivity Score</div>
+          </div>
+          <div class="metric-card orange">
+            <div class="metric-icon orange">💼</div>
+            <div class="metric-value" style="background:linear-gradient(135deg,#f59e0b,#ef4444);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent" id="placementStatus">Not Ready</div>
+            <div class="metric-label">Placement Readiness</div>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">📈 Weekly Study Hours</div>
+                <div class="card-subtitle">Last 7 days</div>
+              </div>
+            </div>
+            <div class="chart-wrapper"><canvas id="weeklyChart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">🍩 Subject Distribution</div>
+                <div class="card-subtitle">Hours per subject</div>
+              </div>
+            </div>
+            <div class="chart-wrapper"><canvas id="subjectChart"></canvas></div>
+          </div>
+        </div>
+
+        <!-- Quick Actions + Subjects -->
+        </div>
+
+        <!-- Placement Roadmap Section -->
+        <div class="card" style="margin-top:20px">
+          <div class="card-header">
+            <div>
+              <div class="card-title">🚀 Placement Prep Guide</div>
+              <div class="card-subtitle">Select your target role to generate a roadmap</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-bottom:20px">
+            <select id="roleSelect" class="form-input" style="max-width:250px">
+              <optgroup label="Technical Roles">
+                <option value="Software Engineer">Software Engineer</option>
+                <option value="Software Developer">Software Developer</option>
+                <option value="Frontend Developer">Frontend Developer</option>
+                <option value="Backend Developer">Backend Developer</option>
+                <option value="Full Stack Developer">Full Stack Developer</option>
+                <option value="Web Developer">Web Developer</option>
+                <option value="Mobile App Developer">Mobile App Developer</option>
+                <option value="Game Developer">Game Developer</option>
+                <option value="Data Scientist">Data Scientist</option>
+                <option value="Data Analyst">Data Analyst</option>
+                <option value="Machine Learning Engineer">Machine Learning Engineer</option>
+                <option value="AI Engineer">AI Engineer</option>
+                <option value="Deep Learning Engineer">Deep Learning Engineer</option>
+                <option value="Data Engineer">Data Engineer</option>
+                <option value="Database Administrator (DBA)">Database Administrator (DBA)</option>
+                <option value="Database Developer">Database Developer</option>
+                <option value="Cloud Engineer">Cloud Engineer</option>
+                <option value="DevOps Engineer">DevOps Engineer</option>
+                <option value="Site Reliability Engineer (SRE)">Site Reliability Engineer (SRE)</option>
+                <option value="System Administrator">System Administrator</option>
+                <option value="Network Engineer">Network Engineer</option>
+                <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                <option value="Security Engineer">Security Engineer</option>
+                <option value="Ethical Hacker">Ethical Hacker</option>
+                <option value="Penetration Tester">Penetration Tester</option>
+                <option value="Information Security Analyst">Information Security Analyst</option>
+                <option value="QA Engineer">QA Engineer</option>
+                <option value="Automation Test Engineer">Automation Test Engineer</option>
+                <option value="Manual Tester">Manual Tester</option>
+                <option value="Performance Tester">Performance Tester</option>
+                <option value="Embedded Systems Engineer">Embedded Systems Engineer</option>
+                <option value="IoT Engineer">IoT Engineer</option>
+                <option value="Blockchain Developer">Blockchain Developer</option>
+                <option value="AR/VR Developer">AR/VR Developer</option>
+                <option value="Solutions Architect">Solutions Architect</option>
+              </optgroup>
+              <optgroup label="Non-Technical Roles">
+                <option value="Project Manager">Project Manager</option>
+                <option value="Program Manager">Program Manager</option>
+                <option value="Product Manager">Product Manager</option>
+                <option value="Business Analyst">Business Analyst</option>
+                <option value="Operations Manager">Operations Manager</option>
+                <option value="IT Consultant">IT Consultant</option>
+                <option value="Technical Support Engineer">Technical Support Engineer</option>
+                <option value="Customer Success Manager">Customer Success Manager</option>
+                <option value="Pre-Sales Engineer">Pre-Sales Engineer</option>
+                <option value="Solutions Consultant">Solutions Consultant</option>
+                <option value="Digital Marketing Specialist">Digital Marketing Specialist</option>
+                <option value="SEO Specialist">SEO Specialist</option>
+                <option value="Product Marketing Manager">Product Marketing Manager</option>
+                <option value="Sales Executive (IT Products)">Sales Executive (IT Products)</option>
+                <option value="HR Manager">HR Manager</option>
+                <option value="Technical Recruiter">Technical Recruiter</option>
+                <option value="Training Manager">Training Manager</option>
+                <option value="Technical Writer">Technical Writer</option>
+                <option value="Content Writer">Content Writer</option>
+                <option value="UI Designer">UI Designer</option>
+                <option value="UX Designer">UX Designer</option>
+                <option value="Product Designer">Product Designer</option>
+                <option value="Graphic Designer">Graphic Designer</option>
+                <option value="Product Owner">Product Owner</option>
+                <option value="Technology Consultant">Technology Consultant</option>
+                <option value="Data Product Manager">Data Product Manager</option>
+              </optgroup>
+            </select>
+            <button onclick="getPlacementRoadmap()" class="btn btn-primary">Quick Preview</button>
+            <a href="ai/placement_roadmap.html" class="btn btn-secondary">Full Roadmap Selection</a>
+          </div>
+          <div id="roadmapArea" class="roadmap-grid" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:15px">
+            <!-- Roadmap items will appear here -->
+          </div>
+          <div id="guideArea" style="margin-top:20px;padding:15px;background:rgba(255,255,255,0.05);border-radius:10px;display:none">
+            <h4 style="margin-bottom:10px">💡 Preparation Tips</h4>
+            <div id="guideList" style="font-size:14px;color:var(--text-muted);line-height:1.6"></div>
+          </div>
+        </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">⚡ Quick Actions</div></div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <a href="study/add_session.html" class="btn btn-primary">➕ Log Study Session</a>
+              <a href="ai/productivity_analysis.html" class="btn btn-secondary">🤖 Run AI Analysis</a>
+              <a href="ai/placement_readiness.html" class="btn btn-secondary">💼 Placement Readiness</a>
+              <a href="ai/ai_study_plan.html" class="btn btn-secondary">📅 Generate Study Plan</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><div class="card-title">📚 Subjects Studied</div></div>
+            <div id="subjectsList" style="display:flex;flex-wrap:wrap;gap:8px">
+              <div class="empty-state" style="padding:20px;width:100%">
+                <p>No subjects yet. <a href="study/add_session.html" style="color:var(--accent-blue)">Add a session →</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- Recommendation Modal -->
+<div id="recommendationModal" class="modal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);z-index:9999;backdrop-filter:blur(5px);align-items:center;justify-content:center">
+  <div class="card" style="max-width:450px;width:90%;padding:30px;text-align:center;position:relative;animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)">
+    <button onclick="closeModal()" style="position:absolute;top:15px;right:15px;background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:20px">✕</button>
+    <div style="font-size:50px;margin-bottom:15px">🚀</div>
+    <h2 style="margin-bottom:10px;font-size:22px">Tailored Career Path!</h2>
+    <p style="color:var(--text-secondary);font-size:14px;margin-bottom:20px;line-height:1.6">
+      Based on your recent study history in <strong id="topUsedSubject" style="color:var(--accent-blue)">...</strong>, 
+      the AI suggests you're on a great path to become a:
+    </p>
+    <div style="background:rgba(99,130,255,0.1);padding:15px;border-radius:12px;margin-bottom:20px">
+      <div id="suggestedRoleText" style="font-size:20px;font-weight:800;color:var(--accent-blue);letter-spacing:-0.5px">Software Engineer</div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <a href="ai/placement_roadmap.html" class="btn btn-primary btn-full">View Full Roadmap</a>
+      <button onclick="closeModal()" class="btn btn-secondary btn-full">Maybe Later</button>
+    </div>
+  </div>
+</div>
+
+<style>
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.8) translateY(20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+</style>
+
+<script src="js/charts.js"></script>
+<script>
+let weeklyChart, subjectChart;
+
+function closeModal() {
+  document.getElementById('recommendationModal').style.display = 'none';
+}
+
+async function loadDashboard() {
+  const user = await requireAuthRoot();
+  if (!user) return;
+  setUserDisplay(user.username);
+  loadNotifBadge();
+
+  try {
+    const data = await api('/get_dashboard');
+    document.getElementById('loadingState').style.display = 'none';
+    document.getElementById('dashboardContent').style.display = 'block';
+
+    document.getElementById('totalHours').textContent = data.total_hours + 'h';
+    document.getElementById('subjectsCount').textContent = data.subjects_studied;
+    document.getElementById('productivityScore').textContent = data.productivity_score + '%';
+    document.getElementById('placementStatus').textContent = data.placement_readiness ? 'Ready' : 'Not Ready';
+
+    // Show AI Role Suggestion if available
+    if (data.suggested_role && data.subject_distribution.length > 0) {
+      document.getElementById('topUsedSubject').textContent = data.subject_distribution[0].subject;
+      document.getElementById('suggestedRoleText').textContent = data.suggested_role;
+      setTimeout(() => {
+        document.getElementById('recommendationModal').style.display = 'flex';
+      }, 1000);
+    }
+
+    // Weekly chart
+    weeklyChart = createLineChart('weeklyChart',
+      data.weekly_labels,
+      [{
+        label: 'Study Hours',
+        data: data.weekly_hours,
+        borderColor: '#6382ff',
+        backgroundColor: 'rgba(99,130,255,0.12)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#6382ff',
+        pointRadius: 5
+      }]
+    );
+
+    // Subject chart
+    if (data.subject_distribution.length > 0) {
+      createDoughnutChart('subjectChart',
+        data.subject_distribution.map(s => s.subject),
+        data.subject_distribution.map(s => s.hours)
+      );
+
+      const subList = document.getElementById('subjectsList');
+      subList.innerHTML = data.subject_distribution.map(s =>
+        `<div class="badge badge-info" style="padding:6px 12px;font-size:12px">
+          📖 ${s.subject} <span style="opacity:0.7;margin-left:4px">${s.hours}h</span>
+        </div>`
+      ).join('');
+    }
+
+    // Notification badges
+    const cnt = document.querySelectorAll('.notif-badge');
+  } catch (err) {
+    console.error(err);
+    document.getElementById('loadingState').innerHTML = '<p style="color:var(--accent-red)">⚠️ Failed to load dashboard. Is the backend running?</p>';
+  }
+}
+
+async function getPlacementRoadmap() {
+  const role = document.getElementById('roleSelect').value;
+  try {
+    const data = await api('/placement_roadmap', 'POST', { role });
+    const roadmapArea = document.getElementById('roadmapArea');
+    const guideArea = document.getElementById('guideArea');
+    const guideList = document.getElementById('guideList');
+
+    roadmapArea.innerHTML = data.roadmap.map(item => `
+      <div class="card" style="border-left:4px solid var(--accent-blue)">
+        <div style="font-weight:600;margin-bottom:5px">${item.step}</div>
+        <div style="font-size:12px;color:var(--text-muted)">${item.desc}</div>
+        <div class="badge ${item.priority === 'High' ? 'badge-danger' : 'badge-info'}" style="margin-top:8px">${item.priority} Priority</div>
+      </div>
+    `).join('');
+
+    guideList.innerHTML = data.guide.map(g => `<div>${g}</div>`).join('');
+    guideArea.style.display = 'block';
+    showToast(`Roadmap for ${role} generated!`);
+  } catch (err) {
+    console.error(err);
+    showToast('Failed to generate roadmap', 'error');
+  }
+}
+
+loadDashboard();
+</script>
+<script src="js/chatbot-widget.js"></script>
+</body>
+</html>

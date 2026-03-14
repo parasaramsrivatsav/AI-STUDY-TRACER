@@ -1,0 +1,47 @@
+{
+    "title": "C# Tutorial",
+    "lessons": [
+        {
+            "id": "csharp_intro",
+            "title": "C# Introduction",
+            "content": "\n                    <h3>What is C#?</h3>\n                    <ul>\n                        <li>C# (C-Sharp) is a programming language developed by Microsoft that runs on the .NET Framework.</li>\n                        <li>C# is used for developing web apps, desktop apps, mobile apps, games and much more.</li>\n                        <li>C# is an object-oriented language that is easy to learn.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "csharp_getstarted",
+            "title": "C# Get Started",
+            "content": "\n                    <h3>C# Quickstart</h3>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nusing System;\n\nnamespace HelloWorld {\n&nbsp;&nbsp;class Program {\n&nbsp;&nbsp;&nbsp;&nbsp;static void Main(string[] args) {\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Console.WriteLine(\"Hello World!\");\n&nbsp;&nbsp;&nbsp;&nbsp;}\n&nbsp;&nbsp;}\n}\n                        </div>\n                    </div>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "csharp_q1",
+            "question": "Which of the following is the correct extension for C# files?",
+            "options": [".c", ".cpp", ".cs", ".csh"],
+            "answer": 2
+        },
+        {
+            "id": "csharp_q2",
+            "question": "Which keyword is used to output text to the console in C#?",
+            "options": ["Console.Write", "System.Print", "print", "display"],
+            "answer": 0
+        },
+        {
+            "id": "csharp_q3",
+            "question": "Which data type is used to store high-precision decimal values in C#?",
+            "options": ["float", "double", "decimal", "long"],
+            "answer": 2
+        },
+        {
+            "id": "csharp_q4",
+            "question": "How do you declare a variable of type integer in C#?",
+            "options": ["int x = 5;", "var x : int = 5;", "integer x = 5;", "x = 5;"],
+            "answer": 0
+        },
+        {
+            "id": "csharp_q5",
+            "question": "Which symbol is used for C# comments?",
+            "options": ["#", "/*", "//", "--"],
+            "answer": 2
+        }
+    ]
+}

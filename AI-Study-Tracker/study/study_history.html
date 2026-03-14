@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study History - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="study_history.html" class="nav-item active"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">AI Features</div>
+        <a href="../ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="../ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+          <a href="../ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+          <a href="../ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text">S</div>
+        <div class="user-info"><div class="user-name user-display-name">Student</div></div>
+      </a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>📚 Study History</h1><div class="breadcrumb">Study → All Sessions</div></div>
+      <div class="top-bar-right"><a href="add_session.html" class="btn btn-primary btn-sm">➕ Add Session</a></div>
+    </div>
+
+    <div class="page-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">All Study Sessions</div>
+          <div id="sessionCount" class="badge badge-info">0 sessions</div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+          <input type="text" id="searchFilter" class="form-input" placeholder="🔍 Search subject..." style="max-width:200px">
+          <select id="sortFilter" class="form-select" style="max-width:160px">
+            <option value="date_desc">Newest First</option>
+            <option value="date_asc">Oldest First</option>
+            <option value="hours_desc">Most Hours</option>
+            <option value="focus_desc">Highest Focus</option>
+          </select>
+          <select id="subjectFilter" class="form-select" style="max-width:160px">
+            <option value="">All Subjects</option>
+          </select>
+        </div>
+
+        <div id="loadingState" class="loading-state"><div class="spinner"></div></div>
+
+        <div class="table-wrapper" id="tableWrapper" style="display:none">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Date</th><th>Subject</th><th>Start → End</th>
+                <th>Hours</th><th>Focus</th><th>Rating</th><th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="sessionsBody"></tbody>
+          </table>
+        </div>
+        <div id="emptyState" class="empty-state" style="display:none">
+          <div class="empty-icon">📭</div>
+          <h3>No sessions yet</h3>
+          <p>Start tracking your study habits!</p>
+          <a href="add_session.html" class="btn btn-primary">➕ Add First Session</a>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/charts.js"></script>
+<script>
+let allSessions = [];
+requireAuth().then(u => { if (u) { setUserDisplay(u.username); loadSessions(); }});
+
+async function loadSessions() {
+  try {
+    const data = await api('/get_sessions');
+    allSessions = data.sessions;
+    populateSubjectFilter();
+    renderTable(allSessions);
+    document.getElementById('loadingState').style.display = 'none';
+  } catch { document.getElementById('loadingState').innerHTML = '<p style="color:var(--accent-red)">Failed to load sessions.</p>'; }
+}
+
+async function deleteSession(id) {
+  if (!confirm('Are you sure you want to delete this study session?')) return;
+  try {
+    await api(`/delete_session/${id}`, 'DELETE');
+    showToast('Session deleted successfully!');
+    loadSessions();
+  } catch (err) {
+    showToast(err.error || 'Failed to delete session', 'error');
+  }
+}
+
+function populateSubjectFilter() {
+  const subs = [...new Set(allSessions.map(s => s.subject))];
+  const sel = document.getElementById('subjectFilter');
+  sel.innerHTML = '<option value="">All Subjects</option>';
+  subs.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
+}
+
+function renderTable(sessions) {
+  document.getElementById('sessionCount').textContent = sessions.length + ' sessions';
+  if (sessions.length === 0) {
+    document.getElementById('tableWrapper').style.display = 'none';
+    document.getElementById('emptyState').style.display = 'block';
+    return;
+  }
+  document.getElementById('tableWrapper').style.display = 'block';
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('sessionsBody').innerHTML = sessions.map(s => {
+    const fc = focusColor(s.focus_level);
+    return `<tr>
+      <td>${s.date}</td>
+      <td><span class="subject-badge">📖 ${s.subject}</span></td>
+      <td style="color:var(--text-muted);font-size:12px">${s.start_time || '—'} → ${s.end_time || '—'}</td>
+      <td><strong style="color:var(--accent-blue)">${s.duration_hours.toFixed(1)}h</strong></td>
+      <td>
+        <div class="focus-bar">
+          <div class="focus-bar-track"><div class="focus-bar-fill" style="width:${s.focus_level*10}%;background:${fc}"></div></div>
+          <span style="color:${fc};font-size:12px;font-weight:700">${s.focus_level}</span>
+        </div>
+      </td>
+      <td>${ratingStars(s.self_rating)}</td>
+      <td>
+        <button onclick="deleteSession(${s.id})" class="btn btn-sm btn-danger" style="padding:4px 8px;font-size:11px">🗑️ Delete</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function filterAndSort() {
+  const search = document.getElementById('searchFilter').value.toLowerCase();
+  const subject = document.getElementById('subjectFilter').value;
+  const sort = document.getElementById('sortFilter').value;
+  let filtered = allSessions.filter(s =>
+    (!search || s.subject.toLowerCase().includes(search)) &&
+    (!subject || s.subject === subject)
+  );
+  filtered.sort((a, b) => {
+    if (sort === 'date_asc') return a.date.localeCompare(b.date);
+    if (sort === 'hours_desc') return b.duration_hours - a.duration_hours;
+    if (sort === 'focus_desc') return b.focus_level - a.focus_level;
+    return b.date.localeCompare(a.date);
+  });
+  renderTable(filtered);
+}
+
+['searchFilter','sortFilter','subjectFilter'].forEach(id => document.getElementById(id).addEventListener('input', filterAndSort));
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

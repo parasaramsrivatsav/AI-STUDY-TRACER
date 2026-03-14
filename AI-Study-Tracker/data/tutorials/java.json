@@ -1,0 +1,67 @@
+{
+    "title": "Java Tutorial",
+    "lessons": [
+        {
+            "id": "java_intro",
+            "title": "Java Introduction",
+            "content": "\n                    <h3>What is Java?</h3>\n                    <ul>\n                        <li>Java is a popular programming language, created in 1995.</li>\n                        <li>It is owned by Oracle, and more than 3 billion devices run Java.</li>\n                        <li>It is used for: Mobile applications (Android), Desktop applications, Web applications, Games, and much more.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "java_getstarted",
+            "title": "Java Get Started",
+            "content": "\n                    <h3>Quickstart</h3>\n                    <p>In Java, every application begins with a class name, and that class must match the filename.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\npublic class Main {\n&nbsp;&nbsp;public static void main(String[] args) {\n&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(\"Hello World\");\n&nbsp;&nbsp;}\n}\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "java_syntax",
+            "title": "Java Syntax",
+            "content": "\n                    <h3>Java Syntax</h3>\n                    <p>The code in a Java file is usually wrapped in a <code>class</code>. A class is a container for code that represents an object.</p>\n                    <p>The <code>main()</code> method is required and you will see it in every Java program.</p>\n                    <p>Any code inside the <code>main()</code> method will be executed.</p>\n                "
+        },
+        {
+            "id": "java_output",
+            "title": "Java Output",
+            "content": "\n                    <h3>Print Text</h3>\n                    <p>You can use the <code>println()</code> method to print a line of text to the screen:</p>\n                    <p><code>System.out.println(\"Hello World!\");</code></p>\n                    <p>There is also a <code>print()</code> method, which is similar to <code>println()</code>, but it does not insert a new line at the end of the output.</p>\n                "
+        },
+        {
+            "id": "java_comments",
+            "title": "Java Comments",
+            "content": "\n                    <h3>Comments</h3>\n                    <p>Single-line comments start with two forward slashes (<code>//</code>).</p>\n                    <p>Multi-line comments start with <code>/*</code> and end with <code>*/</code>.</p>\n                "
+        },
+        {
+            "id": "java_variables",
+            "title": "Java Variables",
+            "content": "\n                    <h3>Variables</h3>\n                    <p>Variables are containers for storing data values.</p>\n                    <ul>\n                        <li><code>String</code> - stores text, such as \"Hello\"</li>\n                        <li><code>int</code> - stores integers (whole numbers)</li>\n                        <li><code>float</code> - stores floating point numbers</li>\n                        <li><code>char</code> - stores single characters</li>\n                        <li><code>boolean</code> - stores values with two states: true or false</li>\n                    </ul>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "java_q1",
+            "question": "Which keyword is used to create a class in Java?",
+            "options": ["class", "struct", "object", "new"],
+            "answer": 0
+        },
+        {
+            "id": "java_q2",
+            "question": "What is the entry point of a Java program?",
+            "options": ["start()", "init()", "main()", "run()"],
+            "answer": 2
+        },
+        {
+            "id": "java_q3",
+            "question": "How do you declare a constant in Java?",
+            "options": ["const", "final", "static", "immutable"],
+            "answer": 1
+        },
+        {
+            "id": "java_q4",
+            "question": "Which method is used to find the length of a string in Java?",
+            "options": ["getSize()", "len()", "length()", "size()"],
+            "answer": 2
+        },
+        {
+            "id": "java_q5",
+            "question": "Which keyword is used to inherit a class in Java?",
+            "options": ["implements", "extends", "inherits", "using"],
+            "answer": 1
+        }
+    ]
+}

@@ -1,0 +1,122 @@
+{
+    "title": "CSS Tutorial",
+    "lessons": [
+        {
+            "id": "css_intro",
+            "title": "CSS Introduction",
+            "content": "\n                    <h3>What is CSS?</h3>\n                    <ul>\n                        <li>CSS stands for Cascading Style Sheets</li>\n                        <li>CSS describes how HTML elements are to be displayed on screen, paper, or in other media</li>\n                        <li>CSS saves a lot of work. It can control the layout of multiple web pages all at once</li>\n                        <li>External stylesheets are stored in CSS files</li>\n                    </ul>\n                    <div class=\"example-box\">\n                        <h4>CSS Example</h4>\n                        <div class=\"code-block\">\nbody {<br>\n&nbsp;&nbsp;background-color: lightblue;<br>\n}<br>\n<br>\nh1 {<br>\n&nbsp;&nbsp;color: white;<br>\n&nbsp;&nbsp;text-align: center;<br>\n}\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "css_syntax",
+            "title": "CSS Syntax",
+            "content": "\n                    <h3>CSS Syntax</h3>\n                    <p>A CSS rule-set consists of a selector and a declaration block:</p>\n                    <p><code>selector { property: value; }</code></p>\n                    <ul>\n                        <li>The <strong>selector</strong> points to the HTML element you want to style.</li>\n                        <li>The <strong>declaration block</strong> contains one or more declarations separated by semicolons.</li>\n                        <li>Each declaration includes a CSS <strong>property name</strong> and a <strong>value</strong>, separated by a colon.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "css_selectors",
+            "title": "CSS Selectors",
+            "content": "\n                    <h3>CSS Selectors</h3>\n                    <p>CSS selectors are used to \"find\" (or select) the HTML elements you want to style.</p>\n                    <ul>\n                        <li><strong>Element Selector:</strong> selects elements based on the element name. (e.g., <code>p { ... }</code>)</li>\n                        <li><strong>Id Selector:</strong> uses the id attribute of an HTML element to select a specific element. (e.g., <code>#para1 { ... }</code>)</li>\n                        <li><strong>Class Selector:</strong> selects HTML elements with a specific class attribute. (e.g., <code>.center { ... }</code>)</li>\n                        <li><strong>Universal Selector:</strong> selects all HTML elements on the page. (e.g., <code>* { ... }</code>)</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "css_howto",
+            "title": "CSS How To",
+            "content": "\n                    <h3>Three Ways to Insert CSS</h3>\n                    <p>There are three ways of inserting a style sheet:</p>\n                    <ul>\n                        <li><strong>External CSS:</strong> With an external style sheet, you can change the look of an entire website by changing just one file!</li>\n                        <li><strong>Internal CSS:</strong> An internal style sheet may be used if one single HTML page has a unique style.</li>\n                        <li><strong>Inline CSS:</strong> An inline style may be used to apply a unique style for a single element.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "css_colors",
+            "title": "CSS Colors",
+            "content": "\n                    <h3>CSS Colors</h3>\n                    <p>Colors are specified using predefined color names, or RGB, HEX, HSL, RGBA, HSLA values.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\nh1 { color: blue; }<br>\np { color: red; }\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "css_backgrounds",
+            "title": "CSS Backgrounds",
+            "content": "\n                    <h3>CSS Backgrounds</h3>\n                    <p>The CSS background properties are used to add background effects for elements.</p>\n                    <ul>\n                        <li><code>background-color</code></li>\n                        <li><code>background-image</code></li>\n                        <li><code>background-repeat</code></li>\n                        <li><code>background-attachment</code></li>\n                        <li><code>background-position</code></li>\n                        <li><code>background</code> (shorthand property)</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "css_borders",
+            "title": "CSS Borders",
+            "content": "\n                    <h3>CSS Border Properties</h3>\n                    <p>The CSS <code>border</code> properties allow you to specify the style, width, and color of an element's border.</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\np {<br>\n&nbsp;&nbsp;border: 2px solid red;<br>\n&nbsp;&nbsp;border-radius: 5px;<br>\n}\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "css_margins",
+            "title": "CSS Margins",
+            "content": "\n                    <h3>CSS Margins</h3>\n                    <p>Margins are used to create space around elements, outside of any defined borders.</p>\n                    <p>With CSS, you have full control over the margins. There are properties for setting the margin for each side of an element (top, right, bottom, and left).</p>\n                    <p><code>margin: 25px 50px 75px 100px;</code> (top, right, bottom, left)</p>\n                "
+        },
+        {
+            "id": "css_padding",
+            "title": "CSS Padding",
+            "content": "\n                    <h3>CSS Padding</h3>\n                    <p>Padding is used to create space around an element's content, inside of any defined borders.</p>\n                    <p>With CSS, you have full control over the padding. There are properties for setting the padding for each side of an element (top, right, bottom, and left).</p>\n                    <p><code>padding: 25px 50px 75px 100px;</code> (top, right, bottom, left)</p>\n                "
+        },
+        {
+            "id": "css_dimension",
+            "title": "CSS Height/Width",
+            "content": "\n                    <h3>CSS Height and Width</h3>\n                    <p>The <code>height</code> and <code>width</code> properties are used to set the height and width of an element.</p>\n                    <p>The <code>max-width</code> property is used to set the maximum width of an element.</p>\n                "
+        },
+        {
+            "id": "css_boxmodel",
+            "title": "CSS Box Model",
+            "content": "\n                    <h3>The CSS Box Model</h3>\n                    <p>All HTML elements can be considered as boxes. In CSS, the term \"box model\" is used when talking about design and layout.</p>\n                    <p>The CSS box model is essentially a box that wraps around every HTML element. It consists of: margins, borders, padding, and the actual content.</p>\n                    <img src=\"https://www.w3schools.com/css/boxmodel.gif\" alt=\"Box Model\" style=\"max-width:100%; margin-top:10px;\">\n                "
+        },
+        {
+            "id": "css_outline",
+            "title": "CSS Outline",
+            "content": "\n                    <h3>CSS Outline</h3>\n                    <p>An outline is a line that is drawn around elements, OUTSIDE the borders, to make the element \"stand out\".</p>\n                    <ul>\n                        <li><code>outline-style</code></li>\n                        <li><code>outline-color</code></li>\n                        <li><code>outline-width</code></li>\n                        <li><code>outline-offset</code></li>\n                        <li><code>outline</code> (shorthand)</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "css_text",
+            "title": "CSS Text",
+            "content": "\n                    <h3>CSS Text Formatting</h3>\n                    <p>CSS has a lot of properties for formatting text.</p>\n                    <ul>\n                        <li><code>color</code></li>\n                        <li><code>text-align</code></li>\n                        <li><code>text-decoration</code></li>\n                        <li><code>text-transform</code></li>\n                        <li><code>text-spacing</code></li>\n                        <li><code>text-shadow</code></li>\n                    </ul>\n                "
+        },
+        {
+            "id": "css_fonts",
+            "title": "CSS Fonts",
+            "content": "\n                    <h3>CSS Fonts</h3>\n                    <p>Choosing the right font has a huge impact on how a reader experiences a website.</p>\n                    <ul>\n                        <li><code>font-family</code></li>\n                        <li><code>font-style</code></li>\n                        <li><code>font-size</code></li>\n                        <li><code>font-weight</code></li>\n                        <li><code>font-variant</code></li>\n                    </ul>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "css_q1",
+            "question": "What does CSS stand for?",
+            "options": [
+                "Creative Style Sheets",
+                "Computer Style Sheets",
+                "Cascading Style Sheets",
+                "Colorful Style Sheets"
+            ],
+            "answer": 2
+        },
+        {
+            "id": "css_q2",
+            "question": "Which HTML attribute is used to define inline styles?",
+            "options": ["font", "class", "styles", "style"],
+            "answer": 3
+        },
+        {
+            "id": "css_q3",
+            "question": "Which is the correct CSS syntax?",
+            "options": [
+                "body {color: black;}",
+                "{body:color=black;}",
+                "body:color=black;",
+                "{body;color:black;}"
+            ],
+            "answer": 0
+        },
+        {
+            "id": "css_q4",
+            "question": "How do you add a background color for all &lt;h1&gt; elements?",
+            "options": [
+                "h1.all {background-color:#FFFFFF;}",
+                "all.h1 {background-color:#FFFFFF;}",
+                "h1 {background-color:#FFFFFF;}",
+                "h1 {bg-color:#FFFFFF;}"
+            ],
+            "answer": 2
+        },
+        {
+            "id": "css_q5",
+            "question": "Which CSS property is used to change the text color of an element?",
+            "options": ["fgcolor", "text-color", "color", "font-color"],
+            "answer": 2
+        }
+    ]
+}

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Placement Readiness - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+  <body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-wrap">
+          <div class="logo-icon">🎓</div>
+          <div class="logo-text">
+            <h2>AI Study Tracker</h2>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+          <a href="../notifications.html" class="nav-item"><span
+              class="nav-icon">🔔</span><span>Notifications</span></a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Study</div>
+          <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add
+              Session</span></a>
+          <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study
+              History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+          <div class="nav-section-title">AI Features</div>
+          <a href="productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity
+              AI</span></a>
+          <a href="placement_readiness.html" class="nav-item active"><span class="nav-icon">💼</span><span>Placement
+              AI</span></a>
+          <a href="placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span> Strategic Roadmap</a>
+          <a href="ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Analytics</div>
+          <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly
+              Progress</span></a>
+          <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject
+              Analysis</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="../profile.html" class="user-card">
+          <div class="user-avatar user-avatar-text">S</div>
+          <div class="user-info">
+            <div class="user-name user-display-name">Student</div>
+          </div>
+        </a>
+        <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <h1>💼 Placement Readiness Prediction</h1>
+          <div class="breadcrumb">AI → Random Forest Model</div>
+        </div>
+      </div>
+      <div class="page-content">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title">📋 Input Your Profile Data</div>
+            </div>
+            <form id="placementForm">
+              <div class="form-group">
+                <label class="form-label">Avg Study Hours/Day: <strong id="ehVal">4</strong></label>
+                <input type="range" class="form-range" id="eh" min="0" max="15" step="0.5" value="4">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Social Media Hours/Day: <strong id="smVal">2</strong>h</label>
+                <input type="range" class="form-range" id="sm" min="0" max="12" step="0.5" value="2">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Stress Level: <strong id="stVal">5</strong>/10</label>
+                <input type="range" class="form-range" id="st" min="1" max="10" value="5">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Time Management Score: <strong id="tmVal">6</strong>/10</label>
+                <input type="range" class="form-range" id="tm" min="1" max="10" value="6">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Communication Skills: <strong id="csVal">6</strong>/10</label>
+                <input type="range" class="form-range" id="cs" min="1" max="10" value="6">
+              </div>
+              <button type="submit" id="predictBtn" class="btn btn-primary btn-full" style="margin-top:10px">💼 Predict
+                Placement Readiness</button>
+            </form>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom:20px">
+              <div class="card-header">
+                <div class="card-title">🎯 Prediction Result</div>
+              </div>
+              <div id="predResult">
+                <div class="empty-state" style="padding:40px">
+                  <div class="empty-icon">💼</div>
+                  <p>Adjust the sliders and click Predict to get your Placement Readiness status.</p>
+                </div>
+              </div>
+            </div>
+            <div class="chart-card">
+              <div class="card-header">
+                <div class="card-title">📈 Profile Visualization</div>
+              </div>
+              <div class="chart-wrapper"><canvas id="radarChart"></canvas></div>
+            </div>
+
+            <div class="card" style="margin-top:20px">
+              <div class="card-header">
+                <div class="card-title">🤖 AI Model Insights</div>
+              </div>
+              <div style="font-size:13px;color:var(--text-secondary);line-height:1.6">
+                <div
+                  style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0">
+                  <span>Model Type:</span>
+                  <span style="color:var(--text-primary);font-weight:600">Random Forest Classifier</span>
+                </div>
+                <div
+                  style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0">
+                  <span>Input Features:</span>
+                  <span style="color:var(--text-primary);font-weight:600">Study, Social, Stress, Time Mgmt, Comm</span>
+                </div>
+                <div
+                  style="display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding:8px 0">
+                  <span>Model Accuracy:</span>
+                  <span style="color:var(--accent-green);font-weight:600">~87.5%</span>
+                </div>
+                <div style="margin-top:10px;font-style:italic;color:var(--text-muted)">
+                  This AI predicts your career readiness based on your daily behavior and soft skills, providing a
+                  roadmap for improvement.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../js/charts.js"></script>
+  <script>
+    requireAuth().then(u => { if (u) setUserDisplay(u.username); });
+
+    const rangeDefs = [
+      ['eh', 'ehVal', '', 1],
+      ['sm', 'smVal', 'h', 1],
+      ['st', 'stVal', '', 0],
+      ['tm', 'tmVal', '', 0],
+      ['cs', 'csVal', '', 0]
+    ];
+    rangeDefs.forEach(([id, disp, u, d]) => {
+      const input = document.getElementById(id);
+      if (input) {
+        input.addEventListener('input', e => {
+          document.getElementById(disp).textContent = parseFloat(e.target.value).toFixed(d) + u;
+        });
+      }
+    });
+
+    let radarChart;
+    document.getElementById('placementForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      setLoading('predictBtn', true, 'Analyzing Profile...');
+      try {
+        const payload = {
+          study_hours: parseFloat(document.getElementById('eh').value),
+          social_media_hours: parseFloat(document.getElementById('sm').value),
+          stress_level: parseInt(document.getElementById('st').value),
+          time_management: parseInt(document.getElementById('tm').value),
+          communication_skills: parseInt(document.getElementById('cs').value)
+        };
+        const data = await api('/placement_prediction', 'POST', payload);
+
+        const isReady = data.status.includes('Ready');
+        const statusColor = isReady ? '#10b981' : '#ef4444';
+        const resultIcon = isReady ?
+          `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="${statusColor}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>` :
+          `<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="${statusColor}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
+
+        document.getElementById('predResult').innerHTML = `
+      <div style="text-align:center;padding:20px 0">
+        <div style="margin-bottom:15px;display:flex;justify-content:center;animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)">
+          ${resultIcon}
+        </div>
+        <div style="font-size:24px;font-weight:800;color:${statusColor};margin-bottom:8px;letter-spacing:-0.5px">${data.status}</div>
+        <div style="font-size:14px;color:var(--text-secondary);max-width:300px;margin:0 auto;line-height:1.5">${data.advice}</div>
+      </div>
+      
+      <div style="margin-top:20px;padding-top:15px;border-top:1px solid var(--border)">
+        <div style="font-size:12px;font-weight:700;color:var(--text-muted);margin-bottom:12px;text-transform:uppercase">Score Summary</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div class="input-snapshot" style="background:rgba(255,255,255,0.03);padding:10px;border-radius:8px">
+            <span style="display:block;font-size:11px;color:var(--text-muted)">Technical Prep</span>
+            <span style="font-weight:600;color:var(--accent-blue)">${((payload.study_hours / 15) * 100).toFixed(0)}%</span>
+          </div>
+          <div class="input-snapshot" style="background:rgba(255,255,255,0.03);padding:10px;border-radius:8px">
+            <span style="display:block;font-size:11px;color:var(--text-muted)">Soft Skills</span>
+            <span style="font-weight:600;color:var(--accent-purple)">${payload.communication_skills * 10}%</span>
+          </div>
+        </div>
+      </div>`;
+
+        if (radarChart) radarChart.destroy();
+        radarChart = createRadarChart('radarChart',
+          ['Study', 'Social (Inv)', 'Stress (Inv)', 'Time Mgmt', 'Comm Skills'],
+          [{
+            label: 'Your Metrics',
+            data: [
+              (payload.study_hours / 15) * 100,
+              (12 - payload.social_media_hours) / 12 * 100,
+              (10 - payload.stress_level) * 10,
+              payload.time_management * 10,
+              payload.communication_skills * 10
+            ],
+            borderColor: statusColor,
+            backgroundColor: `${statusColor}22`,
+            pointBackgroundColor: statusColor
+          }]
+        );
+      } catch (err) {
+        document.getElementById('predResult').innerHTML = `<div class="alert error">❌ ${err.error || 'Prediction failed.'}</div>`;
+      }
+      setLoading('predictBtn', false);
+    });
+  </script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+
+</html>

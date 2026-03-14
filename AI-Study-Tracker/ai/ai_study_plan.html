@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Plan Generator - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+<div class="nav-section-title">AI Features</div>
+        <a href="productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span> Strategic Roadmap</a>
+        <a href="ai_study_plan.html" class="nav-item active"><span class="nav-icon">📅</span><span>Study Plan AI</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card"><div class="user-avatar user-avatar-text">S</div><div class="user-info"><div class="user-name user-display-name">Student</div></div></a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>📅 AI Study Plan Generator</h1><div class="breadcrumb">AI → Personalized Weekly Timetable</div></div>
+    </div>
+    <div class="page-content">
+      <div style="display:grid;grid-template-columns:300px 1fr;gap:20px;align-items:start">
+        <div class="card">
+          <div class="card-header"><div class="card-title">⚙️ Plan Settings</div></div>
+          <form id="planForm">
+            <div class="form-group">
+              <label class="form-label">Daily Study Hours</label>
+              <input type="number" id="dailyHours" class="form-input" value="4" min="1" max="16" step="0.5" placeholder="Hours available daily">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Days Until Exam</label>
+              <input type="number" id="daysExam" class="form-input" value="14" min="1" max="90" placeholder="Number of days">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Add Extra Subjects (optional)</label>
+              <input type="text" id="extraSubject" class="form-input" placeholder="e.g., Mathematics">
+              <button type="button" id="addSubBtn" class="btn btn-secondary btn-sm" style="margin-top:8px;width:100%">➕ Add Subject</button>
+            </div>
+            <div id="subjectTagsArea" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px"></div>
+            <div style="background:rgba(99,130,255,0.08);border:1px solid rgba(99,130,255,0.15);border-radius:8px;padding:12px;font-size:12px;color:var(--text-muted);margin-bottom:16px">
+              💡 The AI will automatically pull your subjects from study history and prioritize weak ones first.
+            </div>
+            <button type="submit" id="planBtn" class="btn btn-primary btn-full">🤖 Generate Study Plan</button>
+          </form>
+        </div>
+
+        <div>
+          <div id="planLoading" class="loading-state" style="display:none"><div class="spinner"></div><p style="margin-top:12px">AI is generating your personalized study plan...</p></div>
+          <div id="planResult" style="display:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+              <div>
+                <div style="font-size:18px;font-weight:700">📅 Your Personalized Study Plan</div>
+                <div style="font-size:13px;color:var(--text-muted)" id="planMeta"></div>
+              </div>
+              <button onclick="window.print()" class="btn btn-secondary btn-sm">🖨️ Print Plan</button>
+            </div>
+            <div class="plan-grid" id="planGrid"></div>
+          </div>
+          <div id="planEmpty" class="card">
+            <div class="empty-state">
+              <div class="empty-icon">📅</div>
+              <h3>Generate Your AI Study Plan</h3>
+              <p>Configure the settings on the left and click Generate. The AI will create a personalized weekly timetable based on your study history, focusing on weak subjects first.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/charts.js"></script>
+<script>
+requireAuth().then(u => { if (u) setUserDisplay(u.username); });
+
+let extraSubjects = [];
+document.getElementById('addSubBtn').addEventListener('click', () => {
+  const val = document.getElementById('extraSubject').value.trim();
+  if (!val || extraSubjects.includes(val)) return;
+  extraSubjects.push(val);
+  document.getElementById('extraSubject').value = '';
+  renderSubjectTags();
+});
+function renderSubjectTags() {
+  document.getElementById('subjectTagsArea').innerHTML = extraSubjects.map((s, i) =>
+    `<span class="badge badge-info" style="cursor:pointer;padding:5px 10px" onclick="removeSubject(${i})">📖 ${s} ✕</span>`
+  ).join('');
+}
+function removeSubject(i) { extraSubjects.splice(i, 1); renderSubjectTags(); }
+
+document.getElementById('planForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  document.getElementById('planEmpty').style.display = 'none';
+  document.getElementById('planResult').style.display = 'none';
+  document.getElementById('planLoading').style.display = 'block';
+  setLoading('planBtn', true, 'Generating...');
+
+  try {
+    const data = await api('/generate_study_plan', 'POST', {
+      daily_hours: parseFloat(document.getElementById('dailyHours').value),
+      days_until_exam: parseInt(document.getElementById('daysExam').value),
+      subjects: extraSubjects
+    });
+
+    document.getElementById('planMeta').textContent = `${data.total_subjects} subjects • ${data.daily_hours}h/day • ${data.days} days`;
+    document.getElementById('planGrid').innerHTML = data.plan.map(day => `
+      <div class="plan-day">
+        <div class="plan-day-header">📅 ${day.day}</div>
+        ${day.sessions.map(s => `
+          <div class="plan-session">
+            <div>
+              <div class="plan-session-name">${s.type} ${s.subject}</div>
+              ${s.note ? `<div class="plan-session-meta">${s.note}</div>` : ''}
+            </div>
+            <div class="plan-session-hours">${s.hours.toFixed(1)}h</div>
+          </div>
+        `).join('')}
+      </div>
+    `).join('');
+
+    document.getElementById('planLoading').style.display = 'none';
+    document.getElementById('planResult').style.display = 'block';
+  } catch (err) {
+    document.getElementById('planLoading').innerHTML = `<div class="alert error">❌ ${err.error || 'Failed to generate plan.'}</div>`;
+  }
+  setLoading('planBtn', false);
+});
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

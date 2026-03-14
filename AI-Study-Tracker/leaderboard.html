@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/collaborative.css">
+  <link rel="stylesheet" href="css/chatbot-widget.css">
+</head>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-wrap">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text"><h2>AI Study Tracker</h2><span>Smart Learning</span></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section">
+        <div class="nav-section-title">Main</div>
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="groups.html" class="nav-item active"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">AI Features</div>
+        <a href="ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text" id="sidebarAvatar">U</div>
+        <div class="user-info"><div class="user-name user-display-name">User</div><div class="user-role">Student</div></div>
+      </a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <h1>🏆 Group Leaderboard</h1>
+        <div class="breadcrumb">Collaborative → Leaderboard</div>
+      </div>
+      <div class="top-bar-right">
+        <button onclick="window.location.href='group_dashboard.html?id='+groupId" class="btn btn-secondary btn-sm">🔙 Back to Dashboard</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">Productivity Rankings</div>
+            <div class="card-subtitle">Points = (Hours × 10) + Avg Focus</div>
+          </div>
+        </div>
+        
+        <table class="leaderboard-table">
+          <thead>
+            <tr style="text-align:left;font-size:12px;color:var(--text-muted)">
+              <th class="leaderboard-cell">Rank</th>
+              <th class="leaderboard-cell">Student</th>
+              <th class="leaderboard-cell">Study Hours</th>
+              <th class="leaderboard-cell">Avg Focus</th>
+              <th class="leaderboard-cell">Points</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboardBody">
+            <!-- Rankings will be injected here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+  </div>
+
+  <script src="js/charts.js"></script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const groupId = urlParams.get('id');
+
+    async function init() {
+      if (!groupId) return window.location.href = 'groups.html';
+      const user = await requireAuthRoot();
+      if (!user) return;
+      setUserDisplay(user.username);
+      const avatar = document.getElementById('sidebarAvatar');
+      if (avatar) avatar.textContent = user.username[0].toUpperCase();
+      loadLeaderboard();
+    }
+
+    async function loadLeaderboard() {
+      try {
+        const data = await api(`/group_leaderboard/${groupId}`);
+        const body = document.getElementById('leaderboardBody');
+        
+        body.innerHTML = data.map((l, index) => {
+          const rank = index + 1;
+          const rankClass = rank <= 3 ? `rank-${rank}` : '';
+          return `
+            <tr class="leaderboard-row ${rankClass}">
+              <td class="leaderboard-cell">
+                <div class="rank-badge">${rank}</div>
+              </td>
+              <td class="leaderboard-cell">
+                <div style="display:flex;align-items:center;gap:10px">
+                  <div class="user-avatar user-avatar-text" style="width:30px;height:30px;font-size:12px">${l.username[0].toUpperCase()}</div>
+                  <div style="font-weight:600">${l.username}</div>
+                </div>
+              </td>
+              <td class="leaderboard-cell">${(l.total_hours || 0).toFixed(1)}h</td>
+              <td class="leaderboard-cell">${(l.avg_focus || 0).toFixed(1)}/10</td>
+              <td class="leaderboard-cell">
+                <span class="points-value">${(l.points || 0).toFixed(1)}</span>
+              </td>
+            </tr>
+          `;
+        }).join('');
+      } catch (err) { console.error(err); }
+    }
+
+    init();
+  </script>
+  <script src="js/chatbot-widget.js"></script>
+</body>
+</html>

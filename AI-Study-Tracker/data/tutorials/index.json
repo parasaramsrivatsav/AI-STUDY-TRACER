@@ -1,0 +1,29 @@
+{
+  "subjects": [
+    {"id": "html", "title": "HTML", "category": "Web Technologies", "file": "html.json"},
+    {"id": "css", "title": "CSS", "category": "Web Technologies", "file": "css.json"},
+    {"id": "javascript", "title": "JavaScript", "category": "Web Technologies", "file": "javascript.json"},
+    {"id": "sql", "title": "SQL", "category": "Data & Languages", "file": "sql.json"},
+    {"id": "python", "title": "Python", "category": "Data & Languages", "file": "python.json"},
+    {"id": "java", "title": "Java", "category": "Programming Languages", "file": "java.json"},
+    {"id": "cpp", "title": "C++", "category": "Programming Languages", "file": "cpp.json"},
+    {"id": "php", "title": "PHP", "category": "Server Side", "file": "php.json"},
+    {"id": "nodejs", "title": "Node.js", "category": "Server Side", "file": "nodejs.json"},
+    {"id": "cybersecurity", "title": "Cyber Security", "category": "Cyber Security", "file": "cybersecurity.json"},
+    {"id": "accessibility", "title": "Accessibility", "category": "Web Technologies", "file": "accessibility.json"},
+    {"id": "csharp", "title": "C#", "category": "Programming Languages", "file": "csharp.json"},
+    {"id": "bootstrap", "title": "Bootstrap", "category": "Web Technologies", "file": "bootstrap.json"},
+    {"id": "react", "title": "React", "category": "Web Technologies", "file": "react.json"},
+    {"id": "xml", "title": "XML", "category": "XML Tutorials", "file": "xml.json"},
+    {"id": "datascience", "title": "Data Science", "category": "Data & Languages", "file": "datascience.json"},
+    {"id": "ml", "title": "Machine Learning", "category": "Data & Languages", "file": "ml.json"}
+  ],
+  "categories": [
+    "Web Technologies",
+    "Data & Languages",
+    "Programming Languages",
+    "Server Side",
+    "Cyber Security",
+    "XML Tutorials"
+  ]
+}

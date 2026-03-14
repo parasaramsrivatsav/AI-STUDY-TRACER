@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Chatbot - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+  <style>
+    .chat-container {
+      height: calc(100vh - 200px);
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .message {
+      max-width: 80%;
+      padding: 12px 18px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+      position: relative;
+      animation: msgPop 0.3s ease-out;
+    }
+    @keyframes msgPop {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .message.user {
+      align-self: flex-end;
+      background: var(--accent-blue);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+    .message.bot {
+      align-self: flex-start;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-primary);
+      border-bottom-left-radius: 4px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .message-info {
+        font-size: 10px;
+        opacity: 0.5;
+        margin-top: 4px;
+        text-align: right;
+    }
+    .chat-input-area {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      display: flex;
+      gap: 12px;
+    }
+    .chat-input {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: white;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .chat-input:focus {
+      border-color: var(--accent-blue);
+    }
+    .typing {
+        font-style: italic;
+        font-size: 12px;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+        display: none;
+    }
+    .source-badge {
+        display: inline-block;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 9px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 4px;
+        font-weight: 700;
+    }
+    .source-faq { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+    .source-ai { background: rgba(168, 85, 247, 0.2); color: #a855f7; }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-wrap">
+          <div class="logo-icon">🎓</div>
+          <div class="logo-text"><h2>AI Study Tracker</h2><span>Smart Learning</span></div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <div class="nav-section-title">Main</div>
+          <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+          <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">Study</div>
+          <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+          <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+        </div>
+        <div class="nav-section">
+          <div class="nav-section-title">AI Features</div>
+          <a href="productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+          <a href="placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+          <a href="placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        </div>
+        <div class="nav-section">
+            <div class="nav-section-title">Analytics</div>
+            <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+            <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a>
+        </div>
+      </nav>
+      <div class="sidebar-footer">
+        <a href="../profile.html" class="user-card">
+          <div class="user-avatar user-avatar-text">S</div>
+          <div class="user-info"><div class="user-name user-display-name">Student</div><div class="user-role">Active Learner</div></div>
+        </a>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main-content">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <h1>💬 AI Hybrid Chatbot</h1>
+          <div class="breadcrumb">Ask anything about the app or study tips</div>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <div class="chat-container">
+          <div class="chat-messages" id="chatMessages">
+            <div class="message bot">
+              Hi there! I'm your AI Study Assistant. I can answer questions about how to use the app, explain your productivity metrics, or give you general study advice. 
+              <br><br>
+              <i>I'll check our local Project FAQ first, and if I don't find an answer, I'll consult our advanced AI Engine!</i>
+            </div>
+          </div>
+          <div id="typingIndicator" class="typing" style="padding: 0 24px">AI is thinking...</div>
+          <form class="chat-input-area" id="chatForm">
+            <input type="text" id="chatInput" class="chat-input" placeholder="Type your message here..." autocomplete="off">
+            <button type="submit" class="btn btn-primary">Send 🚀</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="../js/style.js"></script>
+  <script>
+    const chatMessages = document.getElementById('chatMessages');
+    const chatForm = document.getElementById('chatForm');
+    const chatInput = document.getElementById('chatInput');
+    const typingIndicator = document.getElementById('typingIndicator');
+
+    async function initPage() {
+        const user = await requireAuthRoot();
+        if (!user) return;
+        setUserDisplay(user.username);
+    }
+
+    function addMessage(text, type, source = null) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `message ${type}`;
+        
+        let header = '';
+        if (source) {
+            const sourceClass = source === 'FAQ' ? 'source-faq' : 'source-ai';
+            header = `<div class="source-badge ${sourceClass}">${source}</div><br>`;
+        }
+        
+        msgDiv.innerHTML = `${header}${text}<div class="message-info">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>`;
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    chatForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const query = chatInput.value.trim();
+        if (!query) return;
+
+        addMessage(query, 'user');
+        chatInput.value = '';
+        
+        typingIndicator.style.display = 'block';
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+
+        try {
+            const response = await fetch('http://localhost:5000/chatbot', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query })
+            });
+
+            const data = await response.json();
+            typingIndicator.style.display = 'none';
+
+            if (data.answer) {
+                addMessage(data.answer, 'bot', data.source);
+            } else {
+                addMessage("I'm sorry, I couldn't process that. Please try again.", 'bot');
+            }
+        } catch (err) {
+            console.error(err);
+            typingIndicator.style.display = 'none';
+            addMessage("⚠️ Failed to connect to AI server. Please make sure the backend is running.", 'bot');
+        }
+    };
+
+    initPage();
+  </script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

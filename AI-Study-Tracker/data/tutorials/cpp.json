@@ -1,0 +1,72 @@
+{
+    "title": "C++ Tutorial",
+    "lessons": [
+        {
+            "id": "cpp_intro",
+            "title": "C++ Introduction",
+            "content": "\n                    <h3>What is C++?</h3>\n                    <ul>\n                        <li>C++ is a cross-platform language that can be used to create high-performance applications.</li>\n                        <li>C++ was developed by Bjarne Stroustrup, as an extension to the C language.</li>\n                        <li>C++ gives programmers a high level of control over system resources and memory.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "cpp_getstarted",
+            "title": "C++ Get Started",
+            "content": "\n                    <h3>Quickstart</h3>\n                    <p>The following C++ code prints \"Hello World\" to the screen:</p>\n                    <div class=\"example-box\">\n                        <div class=\"code-block\">\n#include &lt;iostream&gt;\nusing namespace std;\n\nint main() {\n&nbsp;&nbsp;cout &lt;&lt; \"Hello World!\";\n&nbsp;&nbsp;return 0;\n}\n                        </div>\n                    </div>\n                "
+        },
+        {
+            "id": "cpp_syntax",
+            "title": "C++ Syntax",
+            "content": "\n                    <h3>Syntax Breakdown</h3>\n                    <ul>\n                        <li><code>#include &lt;iostream&gt;</code> is a header file library that lets us work with input and output objects.</li>\n                        <li><code>using namespace std</code> means that we can use names for objects and variables from the standard library.</li>\n                        <li><code>int main()</code> is the main function where the execution of code begins.</li>\n                        <li><code>cout</code> is an object used together with the insertion operator (<code>&lt;&lt;</code>) to output/print text.</li>\n                    </ul>\n                "
+        },
+        {
+            "id": "cpp_output",
+            "title": "C++ Output",
+            "content": "\n                    <h3>Output / Printing</h3>\n                    <p>The <code>cout</code> object, together with the <code>&lt;&lt;</code> operator, is used to output values/print text:</p>\n                    <p><code>cout &lt;&lt; \"Hello World!\";</code></p>\n                    <p>You can add as many <code>&lt;&lt;</code> operators as you want. However, note that it does not insert a new line at the end of the output.</p>\n                    <p>To insert a new line, you can use the <code>\n</code> character or the <code>endl</code> manipulator.</p>\n                "
+        },
+        {
+            "id": "cpp_comments",
+            "title": "C++ Comments",
+            "content": "\n                    <h3>Comments</h3>\n                    <p>Single-line comments start with two forward slashes (<code>//</code>).</p>\n                    <p>Multi-line comments start with <code>/*</code> and end with <code>*/</code>.</p>\n                "
+        },
+        {
+            "id": "cpp_variables",
+            "title": "C++ Variables",
+            "content": "\n                    <h3>Variables</h3>\n                    <ul>\n                        <li><code>int</code> - stores integers</li>\n                        <li><code>double</code> - stores floating point numbers</li>\n                        <li><code>char</code> - stores single characters</li>\n                        <li><code>string</code> - stores text</li>\n                        <li><code>bool</code> - stores booleans</li>\n                    </ul>\n                "
+        }
+    ],
+    "quiz": [
+        {
+            "id": "cpp_q1",
+            "question": "Which header file is used for standard input-output in C++?",
+            "options": ["&lt;iostream&gt;", "&lt;stdio.h&gt;", "&lt;conio.h&gt;", "&lt;math.h&gt;"],
+            "answer": 0
+        },
+        {
+            "id": "cpp_q2",
+            "question": "How do you print 'Hello World' in C++?",
+            "options": [
+                "System.out.println(\"Hello World\");",
+                "print \"Hello World\";",
+                "cout &lt;&lt; \"Hello World\";",
+                "printf(\"Hello World\");"
+            ],
+            "answer": 2
+        },
+        {
+            "id": "cpp_q3",
+            "question": "Which operator is used to deallocate memory in C++?",
+            "options": ["remove", "free", "delete", "clear"],
+            "answer": 2
+        },
+        {
+            "id": "cpp_q4",
+            "question": "A class member is by default:",
+            "options": ["public", "private", "protected", "friend"],
+            "answer": 1
+        },
+        {
+            "id": "cpp_q5",
+            "question": "Which keyword is used to define a structure in C++?",
+            "options": ["class", "struct", "define", "union"],
+            "answer": 1
+        }
+    ]
+}

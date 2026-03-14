@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Productivity Analysis - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section">
+<div class="nav-section-title">AI Features</div>
+        <a href="productivity_analysis.html" class="nav-item active"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span> Strategic Roadmap</a>
+        <a href="ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="../progress/weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="../progress/subject_analysis.html" class="nav-item"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card">
+        <div class="user-avatar user-avatar-text">S</div>
+        <div class="user-info"><div class="user-name user-display-name">Student</div></div>
+      </a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>🤖 AI Productivity Analysis</h1><div class="breadcrumb">AI → Productivity Detection</div></div>
+    </div>
+
+    <div class="page-content">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px">
+        <!-- Input form -->
+        <div class="card">
+          <div class="card-header"><div class="card-title">📋 Input Parameters</div></div>
+          <form id="prodForm">
+            <div class="form-group">
+              <label class="form-label">Study Hours/Day: <strong id="studyHrsVal">4</strong></label>
+              <input type="range" class="form-range" id="studyHrs" min="0" max="12" step="0.5" value="4">
+              <div class="range-labels"><span>0</span><span>6</span><span>12</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Sleep Hours: <strong id="sleepHrsVal">7</strong></label>
+              <input type="range" class="form-range" id="sleepHrs" min="3" max="12" step="0.5" value="7">
+              <div class="range-labels"><span>3</span><span>7.5</span><span>12</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Motivation Level: <strong id="motivVal">7</strong>/10</label>
+              <input type="range" class="form-range" id="motiv" min="1" max="10" value="7">
+              <div class="range-labels"><span>Low</span><span>Medium</span><span>High</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Time Management Score: <strong id="tmVal">6</strong>/10</label>
+              <input type="range" class="form-range" id="tm" min="1" max="10" value="6">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Stress Level: <strong id="stressVal">5</strong>/10</label>
+              <input type="range" class="form-range" id="stress" min="1" max="10" value="5">
+              <div class="range-labels"><span>Low</span><span><span>High</span></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Social Media Hours: <strong id="smVal">2</strong>h</label>
+              <input type="range" class="form-range" id="sm" min="0" max="10" step="0.5" value="2">
+            </div>
+            <button type="submit" id="analyzeBtn" class="btn btn-primary btn-full">🤖 Analyze Productivity</button>
+          </form>
+        </div>
+
+        <!-- Results -->
+        <div>
+          <div class="card" id="resultCard" style="margin-bottom:20px">
+            <div class="card-header"><div class="card-title">📊 Analysis Results</div></div>
+            <div id="resultsArea">
+              <div class="empty-state" style="padding:40px">
+                <div class="empty-icon">🤖</div>
+                <p>Adjust the parameters and click Analyze to see AI predictions.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Weak subjects card -->
+          <div class="card" id="weakCard">
+            <div class="card-header"><div class="card-title">⚠️ Weak Subject Detection</div></div>
+            <div id="weakArea"><p style="color:var(--text-muted);font-size:13px">Run analysis to detect weak subjects.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Productivity chart -->
+      <div class="chart-card">
+        <div class="card-header"><div class="card-title">📈 Productive vs Unproductive Hours</div></div>
+        <div class="chart-wrapper"><canvas id="prodChart"></canvas></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/charts.js"></script>
+<script>
+requireAuth().then(u => { if (u) setUserDisplay(u.username); });
+
+// Sliders
+const sliders = [
+  ['studyHrs','studyHrsVal','',1], ['sleepHrs','sleepHrsVal','',1],
+  ['motiv','motivVal','',0], ['tm','tmVal','',0],
+  ['stress','stressVal','',0], ['sm','smVal','h',1]
+];
+sliders.forEach(([id,disp,unit,dec]) => {
+  document.getElementById(id).addEventListener('input', e => {
+    document.getElementById(disp).textContent = parseFloat(e.target.value).toFixed(dec) + unit;
+  });
+});
+
+let prodChart;
+document.getElementById('prodForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  setLoading('analyzeBtn', true, 'Analyzing...');
+  try {
+    const payload = {
+      study_hours: parseFloat(document.getElementById('studyHrs').value),
+      sleep_hours: parseFloat(document.getElementById('sleepHrs').value),
+      motivation: parseInt(document.getElementById('motiv').value),
+      time_management: parseInt(document.getElementById('tm').value),
+      stress_level: parseInt(document.getElementById('stress').value),
+      social_media_hours: parseFloat(document.getElementById('sm').value)
+    };
+    const data = await api('/productivity_analysis', 'POST', payload);
+
+    // ML Result
+    let mlHtml = '';
+    if (data.ml_result) {
+      const isProd = data.ml_result.prediction === 'Productive';
+      mlHtml = `<div style="text-align:center;padding:20px 0">
+        <div style="font-size:56px;margin-bottom:12px">${isProd ? '✅' : '⚠️'}</div>
+        <div style="font-size:24px;font-weight:800;color:${isProd ? 'var(--accent-green)' : 'var(--accent-orange)'}">
+          ${data.ml_result.prediction}
+        </div>
+        <div style="font-size:13px;color:var(--text-muted);margin-top:8px">
+          Model Confidence: ${data.ml_result.confidence}%
+        </div>
+      </div>`;
+    }
+
+    document.getElementById('resultsArea').innerHTML = `
+      ${mlHtml}
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px">
+        <div style="text-align:center;padding:16px;background:rgba(16,185,129,0.08);border-radius:10px;border:1px solid rgba(16,185,129,0.2)">
+          <div style="font-size:28px;font-weight:800;color:var(--accent-green)">${data.productive_hours.toFixed(1)}h</div>
+          <div style="font-size:12px;color:var(--text-muted)">Productive Hours</div>
+        </div>
+        <div style="text-align:center;padding:16px;background:rgba(239,68,68,0.08);border-radius:10px;border:1px solid rgba(239,68,68,0.2)">
+          <div style="font-size:28px;font-weight:800;color:var(--accent-red)">${data.unproductive_hours.toFixed(1)}h</div>
+          <div style="font-size:12px;color:var(--text-muted)">Unproductive Hours</div>
+        </div>
+      </div>
+      <div style="margin-top:16px">
+        <div style="font-size:13px;color:var(--text-muted);margin-bottom:6px">Productivity Rate</div>
+        <div class="progress-bar"><div class="progress-fill blue" style="width:${data.productivity_percentage}%"></div></div>
+        <div style="font-size:14px;font-weight:700;color:var(--accent-blue);margin-top:4px">${data.productivity_percentage}%</div>
+      </div>
+    `;
+
+    // Weak subjects
+    const weakArea = document.getElementById('weakArea');
+    if (data.weak_subjects.length > 0) {
+      weakArea.innerHTML = `
+        <div class="recommendations">
+          ${data.recommendations.map(r => `<div class="recommendation-item"><span class="reco-icon">⚠️</span><span>${r}</span></div>`).join('')}
+        </div>`;
+    } else {
+      weakArea.innerHTML = `<div style="color:var(--accent-green);padding:12px;background:rgba(16,185,129,0.08);border-radius:8px;border:1px solid rgba(16,185,129,0.2)">✅ Great job! No weak subjects detected based on your sessions.</div>`;
+    }
+
+    // Chart
+    if (prodChart) prodChart.destroy();
+    prodChart = createBarChart('prodChart',
+      ['Productive', 'Unproductive'],
+      [{
+        data: [data.productive_hours, data.unproductive_hours],
+        backgroundColor: ['rgba(16,185,129,0.6)', 'rgba(239,68,68,0.6)'],
+        borderColor: ['#10b981', '#ef4444'],
+        borderWidth: 2,
+        borderRadius: 8
+      }],
+      'Study Time Breakdown (hours)'
+    );
+
+  } catch (err) {
+    document.getElementById('resultsArea').innerHTML = `<div class="alert error">❌ ${err.error || 'Analysis failed.'}</div>`;
+  }
+  setLoading('analyzeBtn', false);
+});
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

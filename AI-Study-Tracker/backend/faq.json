@@ -1,0 +1,26 @@
+[
+    {
+        "keywords": ["how to use", "guide", "manual"],
+        "answer": "Welcome to AI Study Tracker! You can log your study sessions, track your focus, and get AI-driven insights on your productivity. Start by adding a session on the dashboard!"
+    },
+    {
+        "keywords": ["productivity score", "score", "calculate"],
+        "answer": "Your productivity score is calculated based on your average focus level and self-ratings across your study sessions. Aim for high focus (7+) to boost your score!"
+    },
+    {
+        "keywords": ["exam readiness", "ready", "exam"],
+        "answer": "Exam readiness is a predictive metric that combines your total study hours, focus levels, and weekly consistency. It helps you understand if you're on track for your goals."
+    },
+    {
+        "keywords": ["add session", "log session", "study history"],
+        "answer": "To add a study session, click 'Add New Session' on the Dashboard. Enter your subject, duration, and focus level to save it to your records."
+    },
+    {
+        "keywords": ["placement roadmap", "career", "job"],
+        "answer": "Check out the 'Career Roadmap' page under AI Features! It suggests a roadmap based on your top subjects and helps you prepare for specific industry roles."
+    },
+    {
+        "keywords": ["who created", "who made", "author"],
+        "answer": "This AI Study Tracker was created to help students leverage machine learning for better academic performance."
+    }
+]

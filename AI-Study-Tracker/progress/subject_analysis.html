@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subject Analysis - AI Study Tracker</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/chatbot-widget.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<body>
+  <div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-logo"><div class="logo-wrap"><div class="logo-icon">🎓</div><div class="logo-text"><h2>AI Study Tracker</h2></div></div></div>
+    <nav class="sidebar-nav">
+      <div class="nav-section"><div class="nav-section-title">Main</div>
+        <a href="../dashboard.html" class="nav-item"><span class="nav-icon">📊</span><span>Dashboard</span></a>
+        <a href="../notifications.html" class="nav-item"><span class="nav-icon">🔔</span><span>Notifications</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Study</div>
+        <a href="../study/add_session.html" class="nav-item"><span class="nav-icon">➕</span><span>Add Session</span></a>
+        <a href="../study/study_history.html" class="nav-item"><span class="nav-icon">📚</span><span>Study History</span></a>
+        <a href="../ai/tutorials.html" class="nav-item"><span class="nav-icon">📖</span><span>Tutorials</span></a>
+</div>
+      <div class="nav-section">
+        <div class="nav-section-title">Collaborative</div>
+        <a href="../groups.html" class="nav-item"><span class="nav-icon">👥</span><span>Study Groups</span></a>
+      </div>
+      <div class="nav-section"><div class="nav-section-title">AI Features</div>
+        <a href="../ai/productivity_analysis.html" class="nav-item"><span class="nav-icon">🤖</span><span>Productivity AI</span></a>
+        <a href="../ai/placement_readiness.html" class="nav-item"><span class="nav-icon">💼</span><span>Placement AI</span></a>
+        <a href="../ai/placement_roadmap.html" class="nav-item"><span class="nav-icon">🚀</span><span>Strategic Roadmap</span></a>
+        <a href="../ai/ai_study_plan.html" class="nav-item"><span class="nav-icon">📅</span><span>Study Plan AI</span></a></div>
+      <div class="nav-section"><div class="nav-section-title">Analytics</div>
+        <a href="weekly_progress.html" class="nav-item"><span class="nav-icon">📈</span><span>Weekly Progress</span></a>
+        <a href="subject_analysis.html" class="nav-item active"><span class="nav-icon">🔍</span><span>Subject Analysis</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <a href="../profile.html" class="user-card"><div class="user-avatar user-avatar-text">S</div><div class="user-info"><div class="user-name user-display-name">Student</div></div></a>
+      <button onclick="logout()" class="btn btn-danger btn-full btn-sm" style="margin-top:10px">🚪 Logout</button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="top-bar-left"><h1>🔍 Subject Analysis</h1><div class="breadcrumb">Analytics → Per-Subject Breakdown</div></div>
+    </div>
+    <div class="page-content">
+      <div class="charts-grid" style="margin-bottom:20px">
+        <div class="chart-card">
+          <div class="card-header"><div class="card-title">📊 Hours Per Subject</div></div>
+          <div class="chart-wrapper"><canvas id="hoursChart"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <div class="card-header"><div class="card-title">🎯 Focus Per Subject</div></div>
+          <div class="chart-wrapper"><canvas id="focusChart"></canvas></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📚 Subject Details & Recommendations</div>
+          <div id="subjectCount" class="badge badge-info">0 subjects</div>
+        </div>
+        <div id="subjectContent" class="loading-state"><div class="spinner"></div></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../js/charts.js"></script>
+<script>
+requireAuth().then(u => { if (u) { setUserDisplay(u.username); loadAnalysis(); }});
+
+async function loadAnalysis() {
+  try {
+    const data = await api('/subject_analysis');
+    const subs = data.subjects;
+    document.getElementById('subjectCount').textContent = subs.length + ' subjects';
+
+    if (subs.length === 0) {
+      document.getElementById('subjectContent').innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><h3>No data yet</h3><p>Add some study sessions to see subject analysis.</p><a href="../study/add_session.html" class="btn btn-primary">➕ Add Session</a></div>';
+      return;
+    }
+
+    const labels = subs.map(s => s.subject);
+    createBarChart('hoursChart', labels, [{
+      label: 'Total Hours',
+      data: subs.map(s => s.total_hours),
+      backgroundColor: subs.map(s => s.status === 'Strong' ? 'rgba(16,185,129,0.6)' : s.status === 'Average' ? 'rgba(99,130,255,0.6)' : 'rgba(239,68,68,0.6)'),
+      borderColor: subs.map(s => s.status === 'Strong' ? '#10b981' : s.status === 'Average' ? '#6382ff' : '#ef4444'),
+      borderWidth: 2, borderRadius: 8
+    }]);
+    createBarChart('focusChart', labels, [{
+      label: 'Avg Focus',
+      data: subs.map(s => s.avg_focus),
+      backgroundColor: 'rgba(168,85,247,0.6)',
+      borderColor: '#a855f7', borderWidth: 2, borderRadius: 8
+    }]);
+
+    document.getElementById('subjectContent').innerHTML = `
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead><tr><th>Subject</th><th>Total Hours</th><th>Focus</th><th>Rating</th><th>Sessions</th><th>Status</th><th>Recommendation</th></tr></thead>
+          <tbody>
+            ${subs.map(s => {
+              const bs = s.status === 'Strong' ? 'success' : s.status === 'Average' ? 'info' : 'danger';
+              return `<tr>
+                <td><span class="subject-badge">📖 ${s.subject}</span></td>
+                <td><strong style="color:var(--accent-blue)">${s.total_hours}h</strong></td>
+                <td>
+                  <div class="focus-bar">
+                    <div class="focus-bar-track"><div class="focus-bar-fill" style="width:${s.avg_focus*10}%"></div></div>
+                    <span style="font-size:12px;font-weight:700">${s.avg_focus}</span>
+                  </div>
+                </td>
+                <td>${ratingStars(Math.round(s.avg_rating))}</td>
+                <td><span class="badge badge-purple">${s.session_count} sessions</span></td>
+                <td><span class="badge badge-${bs}">${s.status}</span></td>
+                <td style="font-size:12px;color:var(--text-muted);max-width:200px">${s.recommendation}</td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>`;
+  } catch { document.getElementById('subjectContent').innerHTML = '<p style="color:var(--accent-red)">Failed to load data.</p>'; }
+}
+</script>
+  <script src="../js/chatbot-widget.js"></script>
+</body>
+</html>

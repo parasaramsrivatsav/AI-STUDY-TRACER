@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - AI Study Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  <div class="auth-bg">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="logo-icon">🎓</div>
+        <h1>AI Study Tracker</h1>
+        <p>Intelligent Learning Platform</p>
+      </div>
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Sign in to access your study dashboard</p>
+      <div id="alert-area"></div>
+      <form id="loginForm" autocomplete="on">
+        <div class="form-group">
+          <label class="form-label">Username or Email</label>
+          <input type="text" id="username" class="form-input" placeholder="Enter your username or email" required
+            autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Enter your password" required
+            autocomplete="current-password">
+        </div>
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-full">
+          🔐 Sign In
+        </button>
+      </form>
+      <div class="auth-link">
+        Don't have an account? <a href="register.html">Create one free</a>
+      </div>
+      <div class="divider"></div>
+      <div style="text-align:center;font-size:11px;color:var(--text-muted)">
+        Demo: use any username/password to register, then login
+      </div>
+    </div>
+  </div>
+  <script src="js/charts.js"></script>
+  <script>
+    if (localStorage.getItem('user_id')) window.location.href = 'dashboard.html';
+    // Redirect if already logged in
+    api('/check_auth').then(d => { if (d.logged_in) window.location.href = 'dashboard.html'; }).catch(() => { });
+
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      setLoading('loginBtn', true, 'Signing in...');
+      try {
+        const res = await api('/login', 'POST', { username, password });
+        localStorage.setItem('user_id', res.user_id);
+        localStorage.setItem('username', res.username);
+        showToast('Login successful! Redirecting...', 'success');
+        setTimeout(() => window.location.href = 'dashboard.html', 800);
+      } catch (err) {
+        showAlert('alert-area', err.error || 'Login failed. Please try again.', 'error');
+        setLoading('loginBtn', false);
+      }
+    });
+  </script>
+</body>
+
+</html>
