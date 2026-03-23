@@ -2,6 +2,7 @@ __pycache__/
 *.pyc
 backend/*.db
 ml/*.pkl
+venv/
 .env
 node_modules/
 .vscode/

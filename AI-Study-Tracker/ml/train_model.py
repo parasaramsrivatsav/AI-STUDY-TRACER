@@ -30,7 +30,7 @@ if not os.path.exists(DATASET_PATH):
 
 df = pd.read_csv(DATASET_PATH)
 print(f"[INFO] Dataset loaded: {df.shape[0]} rows, {df.shape[1]} columns")
-print(f"[INFO] Columns: {list(df.columns)}")
+print(f"[INFO] Columns: {list(df.columns)}") 
 
 # ── Feature Engineering ────────────────────────────────────────────────────────
 # Map dataset columns to our features
